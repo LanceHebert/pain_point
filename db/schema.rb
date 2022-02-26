@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2022_02_24_002550) do
     t.bigint "muscle_group_id", null: false
     t.string "name"
     t.string "description"
+    t.string "videoURL"
+    t.boolean "advanced"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["muscle_group_id"], name: "index_exercises_on_muscle_group_id"

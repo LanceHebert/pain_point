@@ -29,13 +29,13 @@ s4=Session.create!(user_id:u3.id,session:2,date:Time.now.to_datetime,muscle_grou
 
 
 puts "🦾 Get Sweaty... 🦾 "
-e1=Exercise.create!(name:"Chin Tucks",description:"Tuck chin down to neck",muscle_group_id:m1.id)
-e2=Exercise.create!(name:"Rows",description:"row back boy",muscle_group_id:m1.id)
-e3=Exercise.create!(name:"Levator Scapulae Stretch",description:"look down in pocket",muscle_group_id:m1.id)
-e4=Exercise.create!(name:"PNF pattern ",description:"Draw your sword",muscle_group_id:m2.id)
-e5=Exercise.create!(name:"internal shoulder rotation sidelying",description:"on side , raise wrist towards ceiling",muscle_group_id:m2.id)
-e6=Exercise.create!(name:"Bridges",description:"lay on your back and push pelvis to ceiling",muscle_group_id:m3.id)
-e7=Exercise.create!(name:"Bird Dogs",description:"hands and knees position, raise one arm up contralateral leg up at the same time maintaining core tight.",muscle_group_id:m3.id)
+e1=Exercise.create!(videoURL:"www.reddit.com",advanced:true,name:"Chin Tucks",description:"Tuck chin down to neck",muscle_group_id:m1.id)
+e2=Exercise.create!(videoURL:"www.reddit.com",advanced:true,name:"Rows",description:"row back boy",muscle_group_id:m1.id)
+e3=Exercise.create!(videoURL:"www.reddit.com",advanced:true,name:"Levator Scapulae Stretch",description:"look down in pocket",muscle_group_id:m1.id)
+e4=Exercise.create!(videoURL:"www.reddit.com",advanced:true,name:"PNF pattern ",description:"Draw your sword",muscle_group_id:m2.id)
+e5=Exercise.create!(videoURL:"www.reddit.com",advanced:true,name:"internal shoulder rotation sidelying",description:"on side , raise wrist towards ceiling",muscle_group_id:m2.id)
+e6=Exercise.create!(videoURL:"www.reddit.com",advanced:true,name:"Bridges",description:"lay on your back and push pelvis to ceiling",muscle_group_id:m3.id)
+e7=Exercise.create!(videoURL:"www.reddit.com",advanced:true,name:"Bird Dogs",description:"hands and knees position, raise one arm up contralateral leg up at the same time maintaining core tight.",muscle_group_id:m3.id)
 
 
 puts "🥴 Now lets cooldown ....🥴"
