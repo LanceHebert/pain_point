@@ -1,22 +1,23 @@
 import { useState } from "react";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-
-function BodyDiagram({setRegionSelected,regionSelected,buttonValue,setButtonValue}) {
-  
+function BodyDiagram({
+  setRegionSelected,
+  regionSelected,
+  buttonValue,
+  setButtonValue,
+}) {
   let navigate = useNavigate();
 
-
   function handleImgClick(e) {
-  // console.log(`${e.target.id}n`);
-    setRegionSelected({...regionSelected,id:e.target.id})
-     navigate(`/exercises`)   
+    // console.log(`${e.target.id}n`);
+    setRegionSelected({name: e.target.id,advanced: buttonValue});
+    navigate(`/exercises`);
   }
 
-  
   return (
-    <div>
+    <div className="App-header">
       <div>
         <h1 className="BodyTitle">Point to your pain</h1>
         <div>
@@ -57,7 +58,11 @@ function BodyDiagram({setRegionSelected,regionSelected,buttonValue,setButtonValu
         offlabel="Novice exercises"
         offstyle="success"
         style="w-50 mx-3"
-        onChange={()=>setButtonValue(!buttonValue)}
+        onChange={() => {
+          console.log(buttonValue);
+          console.log(regionSelected);
+          setButtonValue(!buttonValue);          
+        }}
       />
       <h6>
         <a href="https://www.vecteezy.com/free-vector/body-pain">

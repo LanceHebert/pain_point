@@ -9,9 +9,9 @@ import Exercises from "./Components/Exercises";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [buttonValue, setButtonValue] = useState(true);
+  const [buttonValue, setButtonValue] = useState(false);
   const [regionSelected, setRegionSelected] = useState({
-    id: "",
+    name: "",
     advanced: buttonValue,
   });
 
@@ -49,7 +49,7 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <header className="App-header">
+      
         <Routes>
           <Route
             path="/"
@@ -62,12 +62,13 @@ function App() {
               />
             }
           />
+  
           <Route
             path="/exercises"
-            element={<Exercises regionSelected={regionSelected} />}
+            element={<Exercises  regionSelected={regionSelected} />}
           />
         </Routes>
-      </header>
+      
     </div>
   );
 }
