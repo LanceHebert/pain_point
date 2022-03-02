@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :set_stats,only: [:index]
+  resources :set_stats,only: [:index,:create]
   resources :exercises,only: [:index,:show]
   resources :muscle_groups,only: [:index]
   resources :sessions
