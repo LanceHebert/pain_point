@@ -5,13 +5,15 @@ class SetStatsController < ApplicationController
 
 
     def create
-        user = User.find_by(id: session[:user_id])
-        # Exercise find by (exercise name)
-        # .sessions create! feed params
+        
+        routine = Routine.create!()
+        r=SetStat.create!(set_stats_params)
+        render json:r, status: :created
+        
     end
 
     private
     def set_stats_params
-        params.permit(:reps, :tband, :sets, :RPE)
+        params.permit(:routine_id,:exercise_id,:reps, :tband, :sets, :RPE)
     end
 end

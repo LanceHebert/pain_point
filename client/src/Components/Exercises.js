@@ -14,7 +14,7 @@ function Exercises({ regionSelected }) {
           console.log(exercises);
           setExerciseStore(exercises);
         }),
-    [regionSelected]
+    []
   );
 
   const filterRegionExercises = exerciseStore.filter(

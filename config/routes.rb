@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   
+  resources :routines,only: [:index,:create,:show]
   resources :set_stats,only: [:index,:create]
   resources :exercises,only: [:index,:show]
   resources :muscle_groups,only: [:index]
-  resources :sessions
   resources :users, only: [:show, :create]
+  resources :sessions
   # Routing logic: fallback requests for React Router.
 
   post "/signup" , to: "users#create"

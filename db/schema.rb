@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_24_002550) do
+ActiveRecord::Schema.define(version: 2022_03_02_002756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,19 +34,19 @@ ActiveRecord::Schema.define(version: 2022_02_24_002550) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "muscle_group_id"
+  create_table "routines", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "muscle_group_id", null: false
     t.date "date"
-    t.integer "session"
+    t.integer "routine"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["muscle_group_id"], name: "index_sessions_on_muscle_group_id"
-    t.index ["user_id"], name: "index_sessions_on_user_id"
+    t.index ["muscle_group_id"], name: "index_routines_on_muscle_group_id"
+    t.index ["user_id"], name: "index_routines_on_user_id"
   end
 
   create_table "set_stats", force: :cascade do |t|
-    t.bigint "session_id", null: false
+    t.bigint "routine_id", null: false
     t.bigint "exercise_id", null: false
     t.integer "reps"
     t.string "tband"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2022_02_24_002550) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["exercise_id"], name: "index_set_stats_on_exercise_id"
-    t.index ["session_id"], name: "index_set_stats_on_session_id"
+    t.index ["routine_id"], name: "index_set_stats_on_routine_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2022_02_24_002550) do
   end
 
   add_foreign_key "exercises", "muscle_groups"
+  add_foreign_key "routines", "muscle_groups"
+  add_foreign_key "routines", "users"
   add_foreign_key "set_stats", "exercises"
-  add_foreign_key "set_stats", "sessions"
+  add_foreign_key "set_stats", "routines"
 end

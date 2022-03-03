@@ -3,9 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginDecider from "./Components/LoginDecider";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Nav, Container, Navbar, NavDropdown } from "react-bootstrap";
+import { Nav, Container, Navbar } from "react-bootstrap";
 import BodyDiagram from "./Components/BodyDiagram";
 import Exercises from "./Components/Exercises";
+import Results from "./Components/Results";
+import RoutineSelect from "./Components/RoutineSelect";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,26 +51,35 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <BodyDiagram
-                setRegionSelected={setRegionSelected}
-                buttonValue={buttonValue}
-                setButtonValue={setButtonValue}
-                regionSelected={regionSelected}
-              />
-            }
-          />
-  
-          <Route
-            path="/exercises"
-            element={<Exercises  regionSelected={regionSelected} />}
-          />
-        </Routes>
-      
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <BodyDiagram
+              setRegionSelected={setRegionSelected}
+              buttonValue={buttonValue}
+              setButtonValue={setButtonValue}
+              regionSelected={regionSelected}
+            />
+          }
+        />
+
+        <Route
+          path="/exercises"
+          element={<Exercises regionSelected={regionSelected} />}
+        />
+        <Route
+          path="/routines/"
+          element={
+            <RoutineSelect
+              regionSelected={regionSelected}
+              setRegionSelected={setRegionSelected}
+            />
+          }
+        />
+        <Route path="/set_stats" element={<Results />} />
+      </Routes>
     </div>
   );
 }

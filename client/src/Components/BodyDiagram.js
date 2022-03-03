@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect} from "react";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,10 +10,15 @@ function BodyDiagram({
 }) {
   let navigate = useNavigate();
 
+  useEffect(()=>localStorage.clear())
   function handleImgClick(e) {
     // console.log(`${e.target.id}n`);
-    setRegionSelected({name: e.target.id,advanced: buttonValue});
-    navigate(`/exercises`);
+    localStorage.clear();
+
+
+    setRegionSelected({ name: e.target.id, advanced: buttonValue });
+    navigate(`/routines/`);
+    // navigate(`/routines/${regionSelected.name}`);
   }
 
   return (
@@ -26,7 +31,9 @@ function BodyDiagram({
             src="/images/back.png"
             alt="back region"
             id="back"
-            onClick={(e) => handleImgClick(e)}
+            onClick={(e) => {
+              handleImgClick(e);
+            }}
           />
           <img
             className="grow"
@@ -57,11 +64,11 @@ function BodyDiagram({
         onstyle="danger"
         offlabel="Novice exercises"
         offstyle="success"
-        style="w-50 mx-3"
+        style={"w-50 mx-3"}
         onChange={() => {
           console.log(buttonValue);
           console.log(regionSelected);
-          setButtonValue(!buttonValue);          
+          setButtonValue(!buttonValue);
         }}
       />
       <h6>

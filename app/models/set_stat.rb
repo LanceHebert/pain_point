@@ -1,4 +1,4 @@
 class SetStat < ApplicationRecord
-  belongs_to :session
+  belongs_to :routine
   belongs_to :exercise
 end
