@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import uuid from "react-uuid";
 import RoutineCard from "./RoutineCard";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 // import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +16,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
     routine: 1,
     date: date.toLocaleDateString(),
     muscle_group_id: 0,
+    pain:0,
   });
   const holdey = localStorage.getItem("region");
   const holdey2 = localStorage.getItem("advancedBackup");
@@ -23,6 +24,8 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
   const [holder2, setHolder2] = useState(
     holdey2 ? holdey2 : regionSelected.advanced
   );
+  const [showSubmitPain, setShowSubmitPain] = useState(false);
+  const [painStatStore, setPainStatStore] = useState(0);
 
   // console.log(localStorage.getItem("region"))
 
@@ -75,6 +78,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
           date: date.toLocaleDateString(),
           routine: 1,
           muscle_group_id: localStorage.getItem("muscle_group_id"),
+          pain: painStatStore,
         }),
       })
         .then((r) => r.json())
@@ -82,8 +86,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
           console.log({ postReturnData });
           localStorage.setItem("routineNumber", postReturnData.id);
         });
-    } 
-    else {
+    } else {
       fetch("/routines", {
         method: "POST",
         headers: {
@@ -93,15 +96,13 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
           date: date.toLocaleDateString(),
           routine: routines.length + 1,
           muscle_group_id: routines[0].muscle_group.id,
+          pain: painStatStore,
         }),
       })
         .then((r) => r.json())
         .then((postReturnData) => {
           console.log({ postReturnData });
-          localStorage.setItem(
-            "routineNumber",
-            postReturnData.id
-          );
+          localStorage.setItem("routineNumber", postReturnData.id);
           localStorage.setItem("muscle_group_id", routines[0].muscle_group.id);
         });
     }
@@ -114,6 +115,45 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
 
   return (
     <div className="App-header">
+      {showSubmitPain ? (
+        "Submitted ✔️"
+      ) : (
+        <div>
+          <Form>
+            <Form.Label>Pain level</Form.Label>
+            <Form.Select
+              DefaultValue="0"
+              placeholder="Enter Pain level"
+              onChange={(e) => {
+                e.preventDefault();
+                setPainStatStore(parseInt(e.target.value));
+              }}
+            >
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </Form.Select>
+          </Form>
+          <Button
+            variant="primary"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowSubmitPain(true);
+            }}
+          >
+            Submit
+          </Button>
+        </div>
+      )}
+
       <Button onClick={createNewRoutine} variant="success">
         Start New Exercise Session
       </Button>

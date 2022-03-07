@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function ExerciseCard({
   exercise,
+  setExerciseEntered,
   // regionSelected,
   // handleSubmitExercise,
   // exerciseStatStore,
@@ -36,7 +37,10 @@ function ExerciseCard({
       body: JSON.stringify(newExercise),
     })
       .then((r) => r.json())
-      .then((returnPostData) => console.log(returnPostData));
+      .then((returnPostData) => {
+        localStorage.setItem("exerciseEntered",true)
+        console.log(returnPostData);
+      });
   }
 
   return (

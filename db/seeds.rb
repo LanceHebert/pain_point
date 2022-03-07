@@ -21,13 +21,13 @@ m3=MuscleGroup.create!(region:"back")
 m4=MuscleGroup.create!(region:"knee")
 
 puts "🤩Its session time!...🤩"
-s1=Routine.create!(user_id:u1.id,routine:1,date:Time.now.to_datetime,muscle_group_id:m1.id)
-s5=Routine.create!(user_id:u1.id,routine:2,date:Time.now.to_datetime,muscle_group_id:m1.id)
-s6=Routine.create!(user_id:u1.id,routine:2,date:Time.now.to_datetime,muscle_group_id:m2.id)
-s7=Routine.create!(user_id:u1.id,routine:2,date:Time.now.to_datetime,muscle_group_id:m3.id)
-s2=Routine.create!(user_id:u2.id,routine:1,date:Time.now.to_datetime,muscle_group_id:m2.id)
-s3=Routine.create!(user_id:u3.id,routine:1,date:Time.now.to_datetime,muscle_group_id:m3.id)
-s4=Routine.create!(user_id:u3.id,routine:2,date:Time.now.to_datetime,muscle_group_id:m3.id)
+s1=Routine.create!(user_id:u1.id,routine:1,date:Time.now.to_datetime,muscle_group_id:m1.id,pain:8)
+s5=Routine.create!(user_id:u1.id,routine:2,date:Time.now.to_datetime,muscle_group_id:m1.id,pain:5)
+s6=Routine.create!(user_id:u1.id,routine:2,date:Time.now.to_datetime,muscle_group_id:m2.id,pain:3)
+s7=Routine.create!(user_id:u1.id,routine:2,date:Time.now.to_datetime,muscle_group_id:m3.id,pain:3)
+s2=Routine.create!(user_id:u2.id,routine:1,date:Time.now.to_datetime,muscle_group_id:m2.id,pain:4)
+s3=Routine.create!(user_id:u3.id,routine:1,date:Time.now.to_datetime,muscle_group_id:m3.id,pain:5)
+s4=Routine.create!(user_id:u3.id,routine:2,date:Time.now.to_datetime,muscle_group_id:m3.id,pain:7)
 
 
 

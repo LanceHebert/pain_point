@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_002756) do
     t.bigint "muscle_group_id", null: false
     t.date "date"
     t.integer "routine"
+    t.integer "pain"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["muscle_group_id"], name: "index_routines_on_muscle_group_id"

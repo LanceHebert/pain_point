@@ -5,6 +5,8 @@ class CreateRoutines < ActiveRecord::Migration[6.1]
       t.belongs_to :muscle_group, null: false, foreign_key: true
       t.date :date
       t.integer :routine
+      t.integer :pain
+
 
       t.timestamps
     end

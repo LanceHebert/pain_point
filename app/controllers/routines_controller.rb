@@ -20,6 +20,6 @@ class RoutinesController < ApplicationController
     private
 
     def routine_params
-        params.permit(:date, :routine,:muscle_group_id)
+        params.permit(:date, :routine,:pain,:muscle_group_id)
     end
 end
