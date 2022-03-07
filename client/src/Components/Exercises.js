@@ -2,9 +2,15 @@ import { useEffect, useState } from "react";
 import YoutubeEmbed from "./YoutubeEmbed";
 import ExerciseCard from "./ExerciseCard";
 import uuid from "react-uuid";
+import { Button,Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-function Exercises({ regionSelected }) {
+
+function Exercises({ regionSelected, setRegionSelected }) {
   const [exerciseStore, setExerciseStore] = useState([]);
+  const isTrueSet = localStorage.getItem("advancedBackup") === "true";
+  const [exerciseStatStore, setExerciseStatStore] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(
     () =>
@@ -17,8 +23,20 @@ function Exercises({ regionSelected }) {
     []
   );
 
+  useEffect(
+    () =>
+      setRegionSelected({
+        ...regionSelected,
+        name: localStorage.getItem("region"),
+      }),
+    []
+  );
+
   const filterRegionExercises = exerciseStore.filter(
-    (exercise) => (regionSelected.name === exercise.muscle_group.region && regionSelected.advanced === exercise.advanced)
+    (exercise) =>
+      (regionSelected.name === exercise.muscle_group.region ||
+        regionSelected.regionBackup === exercise.muscle_group.region) &&
+      isTrueSet === exercise.advanced
   );
 
   const exerciseMap = filterRegionExercises.map((exercise) => {
@@ -26,10 +44,15 @@ function Exercises({ regionSelected }) {
       <ExerciseCard
         key={uuid()}
         exercise={exercise}
-        regionSelected={regionSelected}
+        regionSelected={regionSelected}  
+           
       />
-    );
-  });
+    )})
+    
+  
+
+
+  
 
   return (
     <div>
@@ -63,12 +86,21 @@ function Exercises({ regionSelected }) {
         </div>
       </section>
       {/* <div className="bigBox"> */}
-        <h1>Routine</h1>
-        {/* <div className="tameBox">
+      <h1>Routine</h1>
+      {/* <div className="tameBox">
           <YoutubeEmbed embedId="Sl19P-Xi2nY" />
         </div> */}
       {/* </div> */}
+      <Form></Form>
       {exerciseMap}
+      <Button variant="danger"
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/results")
+        }}
+      >
+        See Your Results
+      </Button>
     </div>
   );
 }

@@ -3,3 +3,6 @@ class MuscleGroupsController < ApplicationController
         render json: MuscleGroup.all
     end
 end
+
+
+# Information wanted: All set stats progression over time ,

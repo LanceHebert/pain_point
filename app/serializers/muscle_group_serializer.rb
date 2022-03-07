@@ -1,4 +1,4 @@
 class MuscleGroupSerializer < ActiveModel::Serializer
   attributes :id, :region
-  has_one :sessions
+  has_one :routines
 end

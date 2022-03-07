@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import { useEffect, useState } from "react";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,14 +9,31 @@ function BodyDiagram({
   setButtonValue,
 }) {
   let navigate = useNavigate();
+  const [muscleID, setMuscleID] = useState([]);
 
-  useEffect(()=>localStorage.clear())
+  useEffect(() => {
+    localStorage.clear();
+    fetch("/muscle_groups")
+      .then((r) => r.json())
+      .then((muscles) => {
+        setMuscleID(muscles);
+      });
+  }, []);
+
   function handleImgClick(e) {
     // console.log(`${e.target.id}n`);
     localStorage.clear();
 
-
-    setRegionSelected({ name: e.target.id, advanced: buttonValue });
+    setRegionSelected({
+      name: e.target.id,
+      advanced: buttonValue,
+      muscle_group_id: muscleID.find((muscle) => muscle.region === e.target.id)
+        .id,
+    });
+    localStorage.setItem(
+      "muscle_group_id",
+      muscleID.find((muscle) => muscle.region === e.target.id).id
+    );
     navigate(`/routines/`);
     // navigate(`/routines/${regionSelected.name}`);
   }

@@ -15,6 +15,8 @@ function App() {
   const [regionSelected, setRegionSelected] = useState({
     name: "",
     advanced: buttonValue,
+    regionBackup: "",
+    muscle_group_id:0,
   });
 
   useEffect(() => {
@@ -44,7 +46,7 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/" onClick={handleLogoutClick}>
+              <Nav.Link onClick={handleLogoutClick}>
                 Logout
               </Nav.Link>
             </Nav>
@@ -67,7 +69,12 @@ function App() {
 
         <Route
           path="/exercises"
-          element={<Exercises regionSelected={regionSelected} />}
+          element={
+            <Exercises
+              regionSelected={regionSelected}
+              setRegionSelected={setRegionSelected}
+            />
+          }
         />
         <Route
           path="/routines/"
@@ -78,7 +85,7 @@ function App() {
             />
           }
         />
-        <Route path="/set_stats" element={<Results />} />
+        <Route path="/results" element={<Results />} />
       </Routes>
     </div>
   );

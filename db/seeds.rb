@@ -30,6 +30,8 @@ s3=Routine.create!(user_id:u3.id,routine:1,date:Time.now.to_datetime,muscle_grou
 s4=Routine.create!(user_id:u3.id,routine:2,date:Time.now.to_datetime,muscle_group_id:m3.id)
 
 
+
+
 puts "🦾 Get Sweaty... 🦾 "
 e1=Exercise.create!(recsets:3,recreps:20,videoEmbed:"Sl19P-Xi2nY",advanced:false,name:"Chin Tucks",description:"Tuck chin down to neck",muscle_group_id:m1.id)
 e2=Exercise.create!(recsets:3,recreps:20,videoEmbed:"Sl19P-Xi2nY",advanced:true,name:"Rows",description:"row back boy",muscle_group_id:m1.id)
@@ -42,7 +44,13 @@ e8=Exercise.create!(recsets:3,recreps:20,videoEmbed:"Sl19P-Xi2nY",advanced:true,
     Ws: elbows are bending out to the side, aiming your thumbs for into your armpits; shoulder blades are coming together and neck is staying neutral.    
     Ys: arms are straight; raise them out in front of you at an angle like you're making a big Y!",muscle_group_id:m2.id)
 e9=Exercise.create!(recsets:3,recreps:3,videoEmbed:"Sl19P-Xi2nY",advanced:false,name:"UPPER TRAP STRETCH",description:"While sitting in a chair, hold the seat with one hand and place your other hand on your head to assist in bending your head to the side as shown.Bend your head towards the opposite side of the hand that is holding the chair seat. You should feel a stretch to the side of your neck. ",muscle_group_id:m1.id)
+
 e10=Exercise.create!(recsets:3,recreps:20,videoEmbed:"Sl19P-Xi2nY",advanced:true,name:"Chin tuck with reverse fly",description:"Lying on your back, place a towel roll under the base of your head and hold a theraband with a straightened elbow.Perform a chin tuck and slowly pull your arms apart, squeezing your shoulder blades together. Slowly return to starting position.",muscle_group_id:m1.id)
+e11=Exercise.create!(recsets:3,recreps:20,videoEmbed:"Sl19P-Xi2nY",advanced:true,name:"Chin tuck with reverse fly",description:"Lying on your back, place a towel roll under the base of your head and hold a theraband with a straightened elbow.Perform a chin tuck and slowly pull your arms apart, squeezing your shoulder blades together. Slowly return to starting position.",muscle_group_id:m4.id)
+e12=Exercise.create!(recsets:3,recreps:3,videoEmbed:"Sl19P-Xi2nY",advanced:false,name:"UPPER TRAP STRETCH",description:"While sitting in a chair, hold the seat with one hand and place your other hand on your head to assist in bending your head to the side as shown.Bend your head towards the opposite side of the hand that is holding the chair seat. You should feel a stretch to the side of your neck. ",muscle_group_id:m4.id)
+e12=Exercise.create!(recsets:3,recreps:3,videoEmbed:"Sl19P-Xi2nY",advanced:true,name:"BACK BREAKER",description:"While sitting in a chair, hold the seat with one hand and place your other hand on your head to assist in bending your head to the side as shown.Bend your head towards the opposite side of the hand that is holding the chair seat. You should feel a stretch to the side of your neck. ",muscle_group_id:m3.id)
+
+
 
 puts "🥴 Now lets cooldown ....🥴"
 
@@ -61,6 +69,7 @@ SetStat.create!(routine_id:s5.id,exercise_id:e2.id,reps:15,tband:"black",sets:3,
 SetStat.create!(routine_id:s5.id,exercise_id:e3.id,reps:20,tband:"black",sets:2,RPE:2) 
 SetStat.create!(routine_id:s6.id,exercise_id:e2.id,reps:15,tband:"black",sets:3,RPE:8) 
 SetStat.create!(routine_id:s7.id,exercise_id:e3.id,reps:20,tband:"black",sets:2,RPE:2) 
+ 
 
 puts "🙏🙏Cooldown fully seeded!🙏🙏"
 

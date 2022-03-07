@@ -81,7 +81,7 @@ function Login({
         <Form.Group className=" rounded" controlId="formBasicErrors">
           {errors.map((err) => (
             <p className="signErrors" key={err}>
-              *{err}*
+              ✖️{err}✖️
             </p>
           ))}
         </Form.Group>
