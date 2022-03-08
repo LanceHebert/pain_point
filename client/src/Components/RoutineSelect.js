@@ -157,6 +157,9 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
       <Button onClick={createNewRoutine} variant="success">
         Start New Exercise Session
       </Button>
+      <Button onClick={()=>navigate("/results")} variant="warning">
+        Go to Results Page
+      </Button>
       {mappedRoutines}
     </div>
   );
