@@ -4,6 +4,10 @@ class CreateExercises < ActiveRecord::Migration[6.1]
       t.belongs_to :muscle_group, null: false, foreign_key: true
       t.string :name
       t.string :description
+      t.string :videoEmbed
+      t.boolean :advanced
+      t.integer :recreps
+      t.integer :recsets
 
       t.timestamps
     end

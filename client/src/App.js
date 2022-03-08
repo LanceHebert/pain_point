@@ -1,19 +1,23 @@
-
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginDecider from "./Components/LoginDecider";
-import {useEffect,useState} from "react";
-import { Routes,Route } from "react-router-dom";
-import Login from "./Components/Login"
-import Signup from "./Components/Signup"
-import { Nav,Container,Navbar,NavDropdown } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Nav, Container, Navbar } from "react-bootstrap";
 import BodyDiagram from "./Components/BodyDiagram";
+import Exercises from "./Components/Exercises";
+import Results from "./Components/Results";
+import RoutineSelect from "./Components/RoutineSelect";
 
 function App() {
-
   const [user, setUser] = useState(null);
-  
-  
+  const [buttonValue, setButtonValue] = useState(false);
+  const [regionSelected, setRegionSelected] = useState({
+    name: "",
+    advanced: buttonValue,
+    regionBackup: "",
+    muscle_group_id:0,
+  });
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -34,22 +38,55 @@ function App() {
   if (!user) return <LoginDecider setUser={setUser} />;
 
   return (
-    <div className="App">      
-    <Navbar bg="light" expand="lg">
-  <Container>
-    <Navbar.Brand href="/">Pain Point</Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="me-auto">
-        <Nav.Link href="/">Home</Nav.Link>
-        <Nav.Link href="/" onClick={handleLogoutClick}>Logout</Nav.Link>          
-      </Nav>
-    </Navbar.Collapse>
-  </Container>
-</Navbar>
-      <header className="App-header">
-      <BodyDiagram />
-      </header>
+    <div className="App">
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand href="/">Pain Point</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link onClick={handleLogoutClick}>
+                Logout
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <BodyDiagram
+              setRegionSelected={setRegionSelected}
+              buttonValue={buttonValue}
+              setButtonValue={setButtonValue}
+              regionSelected={regionSelected}
+            />
+          }
+        />
+
+        <Route
+          path="/exercises"
+          element={
+            <Exercises
+              regionSelected={regionSelected}
+              setRegionSelected={setRegionSelected}
+            />
+          }
+        />
+        <Route
+          path="/routines/"
+          element={
+            <RoutineSelect
+              regionSelected={regionSelected}
+              setRegionSelected={setRegionSelected}
+            />
+          }
+        />
+        <Route path="/results" element={<Results />} />
+      </Routes>
     </div>
   );
 }

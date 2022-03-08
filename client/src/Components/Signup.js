@@ -80,7 +80,7 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
         <Form.Group className="mb-3 rounded" controlId="formBasicErrors">
           {errors.map((err) => (
             <p className="signErrors" key={err}>
-              *{err}*
+              ✖️ {err}✖️
             </p>
           ))}
         </Form.Group>

@@ -35,7 +35,7 @@ function Login({
   }
 
   return (
-    <div className="loginForm">
+    <div className="loginForm ">
       <Form className="rounded p-4 p-sm-3 ">
         <Form.Group className="mb-3" controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
@@ -81,7 +81,7 @@ function Login({
         <Form.Group className=" rounded" controlId="formBasicErrors">
           {errors.map((err) => (
             <p className="signErrors" key={err}>
-              *{err}*
+              ✖️{err}✖️
             </p>
           ))}
         </Form.Group>

@@ -1,5 +1,6 @@
 class SetStatSerializer < ActiveModel::Serializer
-  attributes :id, :reps, :tband, :date, :sets, :RPE
-  has_one :session
+  attributes :id, :reps, :tband, :sets, :RPE
+  has_one :routine
   has_one :exercise
+  
 end
