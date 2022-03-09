@@ -8,6 +8,7 @@ import BodyDiagram from "./Components/BodyDiagram";
 import Exercises from "./Components/Exercises";
 import Results from "./Components/Results";
 import RoutineSelect from "./Components/RoutineSelect";
+import SplashPage from "./Components/SplashPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,6 +32,8 @@ function App() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);
+        localStorage.clear();
+        window.location.href = '/';
       }
     });
   }
@@ -39,24 +42,41 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar bg="light" expand="lg">
+     <Navbar className="color-nav"   expand="lg">
         <Container>
-          <Navbar.Brand href="/">Pain Point</Navbar.Brand>
+        <Navbar.Brand href="/bodydiagram">
+        <img
+          alt=""
+          src="/images/logoWhite.png"
+          width="20"
+          // height="30"
+          className="d-inline-block align-top logo"
+        /><span className="navTitle">
+      Pain Point
+      </span>
+      </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link onClick={handleLogoutClick}>
-                Logout
+            <Nav className="me-auto ">
+              <Nav.Link href="/bodydiagram"  ><span className="navLink">Home</span></Nav.Link>
+              <Nav.Link href="/logout" className="navLink" onClick={handleLogoutClick}>
+              <span className="navLink">Logout</span>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
+      
       <Routes>
-        <Route
+      <Route
           path="/"
+          element={
+            <SplashPage />     
+            
+          }
+        />
+        <Route
+          path="/bodyDiagram"
           element={
             <BodyDiagram
               setRegionSelected={setRegionSelected}
@@ -86,6 +106,7 @@ function App() {
           }
         />
         <Route path="/results" element={<Results />} />
+        
       </Routes>
     </div>
   );

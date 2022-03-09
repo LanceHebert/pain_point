@@ -15,8 +15,9 @@ import {
   Scatter,
   ComposedChart,
   Line,
+  
 } from "recharts";
-import { Spinner } from "react-bootstrap";
+import { Spinner,Card } from "react-bootstrap";
 
 function Results() {
   const [allInfoStore, setAllInfoStore] = useState([]);
@@ -24,6 +25,7 @@ function Results() {
   const [data, setData] = useState([]);
   const [regionArr, setRegionArr] = useState([]);
   const [painData, setPainData] = useState([]);
+  const [setsReps, setSetsReps] = useState([]);
 
   useEffect(
     () =>
@@ -39,14 +41,14 @@ function Results() {
           });
           // Invoking logic for each Chart
           graphRPE(regionChosenFilter);
-
           graphPain(regionChosenFilter);
           graphRegion(allInfo);
+          graphRepsSets(regionChosenFilter);
         }),
     []
   );
   // Graph region PIE CHART   ********
-  //
+
   function graphRegion(allInfo) {
     const neck = allInfo.filter((instance) => {
       return instance.muscle_group.region === "neck";
@@ -109,26 +111,57 @@ function Results() {
       });
 
       let avgRPE = tempHolder / instance.set_stats.length;
-      console.log({ avgRPE }, i + 1);
+      // console.log({ avgRPE }, i + 1);
       tempHolder = 0;
 
       return { session: i + 1, avgRPE: avgRPE };
     });
     setData(hereBeData);
   }
-  // Graph Pain Scatter Chart ********
+  // Graph Pain Scatter Chart **************
   function graphPain(regionChosenFilter) {
-    console.log({ regionChosenFilter });
+    // console.log({ regionChosenFilter });
     const painArr = regionChosenFilter.map((instance, i) => {
-      return { session: i, pain: instance.pain };
+      return { session: i+1, pain: instance.pain };
     });
     setPainData(painArr);
+  }
+
+  // Graph Reps and Sets chart ****************************
+  function graphRepsSets(regionChosenFilter) {
+    console.log({ regionChosenFilter });
+
+    let setsHolder = 0;
+    let repsHolder = 0;
+    // mapping through all sessions
+    const hereBeCombinedStatObj = regionChosenFilter.map((instance, i) => {
+      // map deeper into each set stats array to get RPE avg
+      instance.set_stats.map((statInstance) => {
+        setsHolder += statInstance.sets;
+        repsHolder += (statInstance.reps + statInstance.sets * 20)/(statInstance.sets + 1)
+      });
+
+      let avgRepsPerSet = repsHolder / instance.set_stats.length;
+      let avgTotalSets = setsHolder / instance.set_stats.length;
+
+      console.log({ avgRepsPerSet, avgTotalSets }, i + 1);
+      repsHolder = 0;
+      setsHolder = 0;
+
+      return {
+        session: i + 1,
+        avgRepsPerSet: avgRepsPerSet,
+        avgTotalSets: avgTotalSets,
+      };
+    });
+    setSetsReps(hereBeCombinedStatObj);
   }
 
   return (
     <div>
       Results Page
       <div>
+        <Card>
         <ResponsiveContainer width="100%" height={400}>
           <ComposedChart
             width={500}
@@ -143,15 +176,17 @@ function Results() {
           >
             <CartesianGrid stroke="#f5f5f5" />
             <XAxis dataKey="session" scale="band" />
-            <YAxis />
+            <YAxis domain={[1,  10]} />
             <Tooltip />
             <Legend />
             <Bar dataKey="pain" barSize={20} fill="#413ea0" />
             <Line type="monotone" dataKey="pain" stroke="#ff7300" />
           </ComposedChart>
         </ResponsiveContainer>
+        </Card>
       </div>
       <div>
+        <Card>
         {data.length > 0 ? (
           <ResponsiveContainer width="100%" height={400}>
             <AreaChart data={data}>
@@ -163,7 +198,7 @@ function Results() {
               </defs>
               <Area dataKey="avgRPE" stroke="#2451B7" fill="url(#color)" />
               <XAxis dataKey="session" />
-              <YAxis dataKey="avgRPE" />
+              <YAxis dataKey="avgRPE" domain={[1,  10]}/>
               <Tooltip />
               <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
               <Legend />
@@ -172,9 +207,11 @@ function Results() {
         ) : (
           <Spinner animation="border" variant="primary" />
         )}
+        </Card>
       </div>
       <div>
-        <ResponsiveContainer width="50%" height={400}>
+        <Card>
+        <ResponsiveContainer width="100%" height={400}>
           <PieChart width={400} height={400}>
             <Pie
               data={regionArr}
@@ -196,6 +233,52 @@ function Results() {
             <Legend />
           </PieChart>
         </ResponsiveContainer>
+        </Card>
+      </div>
+      <div>
+        <Card>
+        <ResponsiveContainer width="100%" height={400}>
+          <AreaChart
+            width={500}
+            height={400}
+            data={setsReps}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 0,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Area
+              type="monotone"
+              dataKey="avgTotalSets"
+              stackId="1"
+              stroke="#8884d8"
+              fill="#8884d8"
+            />
+            <Area
+              type="monotone"
+              dataKey="avgRepsPerSet"
+              stackId="1"
+              stroke="#82ca9d"
+              fill="#82ca9d"
+            />
+            {/* <Area
+              type="monotone"
+              dataKey="amt"
+              stackId="1"
+              stroke="#ffc658"
+              fill="#ffc658"
+            /> */}
+            <Legend />
+          </AreaChart>
+          
+        </ResponsiveContainer>
+        </Card>
       </div>
     </div>
   );

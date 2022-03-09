@@ -31,8 +31,9 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
   return (
     <div className="loginForm">
       <Form className="rounded p-4 p-sm-3 ">
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Username</Form.Label>
+      <h2 className="titleCard">Register</h2>
+        <Form.Group className="mb-3 shadow" controlId="formBasicUsername">
+          {/* <Form.Label>Username</Form.Label> */}
           <Form.Control
             type="text"
             placeholder="Enter Username"
@@ -41,8 +42,8 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
             }
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+        <Form.Group className="mb-3 shadow" controlId="formBasicPassword">
+          {/* <Form.Label>Password</Form.Label> */}
           <Form.Control
             type="password"
             id="password"
@@ -52,8 +53,8 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
             }
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPasswordConfirmation">
-          <Form.Label>Password Confirmation</Form.Label>
+        <Form.Group className="mb-3 shadow" controlId="formBasicPasswordConfirmation">
+          {/* <Form.Label>Password Confirmation</Form.Label> */}
           <Form.Control
             type="password"
             placeholder="Re-Enter Password"
@@ -70,7 +71,7 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
           <Form.Check type="checkbox" label="Remember Me" />
         </Form.Group>
         <Button
-          className="mb-3"
+          className="mb-3 loginButton"
           variant="primary"
           type="submit"
           onClick={(e) => handleSignupSubmit(e)}

@@ -16,6 +16,12 @@ class RoutinesController < ApplicationController
         r= user.routines.where(muscle_group:MuscleGroup.where(region:params[:id]))
         render json:r
     end
+    def destroy
+        user = User.find_by(id: session[:user_id])
+        r=user.routines.find(params[:id])
+        r.destroy!
+        render json: {}, status: 204
+    end
 
     private
 

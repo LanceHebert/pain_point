@@ -37,8 +37,9 @@ function Login({
   return (
     <div className="loginForm ">
       <Form className="rounded p-4 p-sm-3 ">
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Username</Form.Label>
+        <h2 className="titleCard">LOGIN</h2>
+        <Form.Group className="mb-3 shadow" controlId="formBasicUsername">
+          {/* <Form.Label>Username</Form.Label> */}
           <Form.Control
             type="text"
             placeholder="Enter Username"
@@ -47,8 +48,8 @@ function Login({
             }
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+        <Form.Group className="mb-3 shadow" controlId="formBasicPassword">
+          {/* <Form.Label>Password</Form.Label> */}
           <Form.Control
             type="password"
             placeholder="Enter Password"
@@ -61,30 +62,33 @@ function Login({
           <Form.Check type="checkbox" label="Remember Me" />
         </Form.Group>
         <div className="mb-3">
-        <Button
-        
-          variant="primary"
-          type="submit"
-          onClick={(e) => handleSubmit(e)}
-        >
-          {isLoading ? "Loading..." : "Login"}
-        </Button>
-        <Button
-        
-          color="primary"
-          className="ms-5"
-          onClick={() => setShowLogin(false)}
-        >
-          SignUp
-        </Button>
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={(e) => handleSubmit(e)}
+            className="loginButton"
+          >
+            {isLoading ? "Loading..." : "Login"}
+          </Button>
+          {/* <Button
+            color="primary"
+            className="ms-5"
+            onClick={() => setShowLogin(false)}
+          >
+            SignUp
+          </Button> */}
         </div>
-        <Form.Group className=" rounded" controlId="formBasicErrors">
+        <Form.Group className="errors rounded" controlId="formBasicErrors">
           {errors.map((err) => (
             <p className="signErrors" key={err}>
-              ✖️{err}✖️
+              ✖️ {err}✖️
             </p>
           ))}
         </Form.Group>
+        <button className="astext" onClick={() => setShowLogin(false)}>
+          <span className="astext">Don't have account yet?</span>{" "}
+          <span className="asTextBold">Sign up!</span>
+        </button>
       </Form>
     </div>
   );
