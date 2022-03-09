@@ -15,8 +15,10 @@ class SessionsController < ApplicationController
         end            
     end
 
-    def destroy        
+    def destroy 
+        p session[:user_id]      
         session.delete(:user_id)
+        p session[:user_id] 
         head :no_content        
     end
 end

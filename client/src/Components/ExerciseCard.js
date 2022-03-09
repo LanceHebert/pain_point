@@ -58,7 +58,7 @@ function ExerciseCard({
           {showExercise ? (
             <>
               <p className="card-text">Based on the Recommended sets, how did you do?</p>
-              <Form>
+              <Form id="alternateGradient">
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formGridSets">
                     <Form.Label>Completed Recommended Sets </Form.Label>

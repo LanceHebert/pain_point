@@ -2,7 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginDecider from "./Components/LoginDecider";
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useNavigate } from "react-router-dom";
 import { Nav, Container, Navbar } from "react-bootstrap";
 import BodyDiagram from "./Components/BodyDiagram";
 import Exercises from "./Components/Exercises";
@@ -17,8 +17,9 @@ function App() {
     name: "",
     advanced: buttonValue,
     regionBackup: "",
-    muscle_group_id:0,
+    muscle_group_id: 0,
   });
+  let navigate = useNavigate();
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -31,9 +32,10 @@ function App() {
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
-        setUser(null);
-        localStorage.clear();
-        window.location.href = '/';
+      // debugger;
+      setUser(null);
+      localStorage.clear();
+      navigate("/")
       }
     });
   }
@@ -42,39 +44,34 @@ function App() {
 
   return (
     <div className="App">
-     <Navbar className="color-nav"   expand="lg">
+      <Navbar className="color-nav" expand="lg">
         <Container>
-        <Navbar.Brand href="/bodydiagram">
-        <img
-          alt=""
-          src="/images/logoWhite.png"
-          width="20"
-          // height="30"
-          className="d-inline-block align-top logo"
-        /><span className="navTitle">
-      Pain Point
-      </span>
-      </Navbar.Brand>
+          <Navbar.Brand href="/bodydiagram">
+            <img
+              alt=""
+              src="/images/logoWhite.png"
+              width="20"
+              // height="30"
+              className="d-inline-block align-top logo"
+            />
+            <span className="navTitle">Pain Point</span>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto ">
-              <Nav.Link href="/bodydiagram"  ><span className="navLink">Home</span></Nav.Link>
-              <Nav.Link href="/" className="navLink" onClick={handleLogoutClick}>
-              <span className="navLink">Logout</span>
+              <Nav.Link href="/bodydiagram">
+                <span className="navLink">Home</span>
+              </Nav.Link>
+              <Nav.Link onClick={handleLogoutClick} className="navLink">
+                <span className="navLink">Logout</span>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      
+
       <Routes>
-      <Route
-          path="/"
-          element={
-            <SplashPage />     
-            
-          }
-        />
+        <Route path="/" element={<SplashPage />} />
         <Route
           path="/bodyDiagram"
           element={
@@ -106,7 +103,6 @@ function App() {
           }
         />
         <Route path="/results" element={<Results />} />
-        
       </Routes>
     </div>
   );
