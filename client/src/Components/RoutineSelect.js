@@ -132,71 +132,73 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
 
   const mappedRoutines = routines.map((routine) => {
     return (
-      <RoutineCard
+      <Col lg={6} className="RoutineCardWidth"><RoutineCard
         key={uuid()}
         routine={routine}
         routines={routines}
         setRoutines={setRoutines}
       />
+      </Col>
     );
   });
 
   return (
     <Container>
-      <Col>
-        {showSubmitPain ? (
-          "Submitted ✔️"
-        ) : (
-          <>
-            <Form>
-              <Form.Label>Pain level</Form.Label>
-              <Form.Select
-                DefaultValue="0"
-                placeholder="Enter Pain level"
-                onChange={(e) => {
+      <Row>
+        <Col>
+          {showSubmitPain ? (
+            "Submitted ✔️"
+          ) : (
+            <>
+              <Form>
+                <Form.Label>Pain level</Form.Label>
+                <Form.Select
+                  DefaultValue="0"
+                  placeholder="Enter Pain level"
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setPainStatStore(parseInt(e.target.value));
+                  }}
+                >
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                </Form.Select>
+              </Form>
+
+              <Button
+                variant="primary"
+                onClick={(e) => {
                   e.preventDefault();
-                  setPainStatStore(parseInt(e.target.value));
+                  setShowSubmitPain(true);
                 }}
               >
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-              </Form.Select>
-            </Form>
+                Submit
+              </Button>
+            </>
+          )}
 
-            <Button
-              variant="primary"
-              onClick={(e) => {
-                e.preventDefault();
-                setShowSubmitPain(true);
-              }}
-            >
-              Submit
-            </Button>
-          </>
-        )}
-      </Col>
-      <div>
-        <Button onClick={createNewRoutine} variant="success">
-          Start New Exercise Session
-        </Button>
-      </div>
+          <Button onClick={createNewRoutine} variant="success">
+            Start New Exercise Session
+          </Button>
 
-      <div>
-        <Button onClick={() => navigate("/results")} variant="warning">
-          Go to Results Page
-        </Button>
-      </div>
+          <Button onClick={() => navigate("/results")} variant="warning">
+            Go to Results Page
+          </Button>
+        </Col>
 
-      <div>{mappedRoutines}</div>
+        <Col  >
+          <Row >{mappedRoutines}</Row>
+        </Col>
+      </Row>
     </Container>
 
     // </div>

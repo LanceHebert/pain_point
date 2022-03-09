@@ -107,12 +107,12 @@ form {
   background-color: #282c34;
   color: white;
 }
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   .card {
     width: 50%;
     height: auto;
   }
-}
+} */
 video {
   opacity: 0.5;
 }
@@ -180,4 +180,7 @@ video {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+.RoutineCardWidth{
+  width:400px;
 }
