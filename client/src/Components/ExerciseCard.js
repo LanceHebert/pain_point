@@ -44,20 +44,20 @@ function ExerciseCard({
   }
 
   return (
-    <div className="App-header">
+    <div >
       <div className="card">
         <YoutubeEmbed embedId={exercise.videoEmbed} />
 
         <div className="card-body">
           <h2 className="card-title">{exercise.name}</h2>
           <p className="card-text">{exercise.description}</p>
-          <p>
+          <p className="pSmallPrint">
             Recommended sets: <br />
              {exercise.recreps} reps for {exercise.recsets} sets 
-          </p>
+          </p >
           {showExercise ? (
             <>
-              <p>Based on the Recommended sets, how did you do?</p>
+              <p className="card-text">Based on the Recommended sets, how did you do?</p>
               <Form>
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formGridSets">

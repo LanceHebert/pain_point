@@ -10,7 +10,7 @@ function RoutineCard({ routine,setRoutines,routines }) {
   }
 
   return (
-    <>
+    <div className="routineBorderCard">
       <Card >
         <Card.Header className="routineCardHeader">
           Session: {routine.routine} - {routine.muscle_group.region}
@@ -28,7 +28,7 @@ function RoutineCard({ routine,setRoutines,routines }) {
           </Button>
         </Card.Body>
       </Card>
-    </>
+    </div>
   );
 }
 

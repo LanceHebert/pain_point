@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import YoutubeEmbed from "./YoutubeEmbed";
 import ExerciseCard from "./ExerciseCard";
 import uuid from "react-uuid";
-import { Button, Form,Modal } from "react-bootstrap";
+import { Button, Form, Modal, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Exercises({ regionSelected, setRegionSelected }) {
   const [exerciseStore, setExerciseStore] = useState([]);
@@ -42,12 +43,14 @@ function Exercises({ regionSelected, setRegionSelected }) {
 
   const exerciseMap = filterRegionExercises.map((exercise) => {
     return (
-      <ExerciseCard
-        key={uuid()}
-        exercise={exercise}
-        regionSelected={regionSelected}
-        // setExerciseEntered={setExerciseEntered}
-      />
+      <Col lg={6} className="pb-3 routineCard">
+        <ExerciseCard
+          key={uuid()}
+          exercise={exercise}
+          regionSelected={regionSelected}
+          // setExerciseEntered={setExerciseEntered}
+        />
+      </Col>
     );
   });
   // function handleSubmitPain() {
@@ -68,13 +71,11 @@ function Exercises({ regionSelected, setRegionSelected }) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          
-        </Modal.Header>
+        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <h4>Error</h4>
           <p>
-           Must fill out and submit at least one exercise for this session.
+            Must fill out and submit at least one exercise for this session.
           </p>
         </Modal.Body>
         <Modal.Footer>
@@ -84,13 +85,12 @@ function Exercises({ regionSelected, setRegionSelected }) {
     );
   }
 
-
   return (
-    <div>
+    <div className="exerciseContainer">
       <section id="features">
         <div class="row">
           <div class="col-md-4 col-12">
-            <i class="fas fa-heart icon-format"></i>
+            <i className="fas fa-heart icon-format"></i>
             <h3 class="feature-title">
               Rate of Perceived exertion should be kept below 8
             </h3>
@@ -98,38 +98,45 @@ function Exercises({ regionSelected, setRegionSelected }) {
               RPE—or the Rate of Perceived Exertion—is a scale used to identify
               the intensity of your exercise based on how hard you feel (or
               perceive) your effort to be. Its subjective so don't go over what
-              YOU consider an 8.{" "}
+              YOU consider an 8 while completing these exercises.
             </p>
           </div>
           <div class="col-md-4 col-12">
+            <FontAwesomeIcon icon="fa-solid fa-circle-radiation" />
             <i class="fas fa-check-circle icon-format"></i>
             <h3 class="feature-title">Don't "push" through pain</h3>
             <p>Exercise should be mostly pain free and comfortable</p>
           </div>
           <div class="col-md-4 col-12">
             <i class="fas fa-bullseye icon-format"></i>
-            <h3 class="feature-title">Stretch minimum is 3 x 30 seconds</h3>
+            <h3 class="feature-title">
+              Stretch minimum is 30 second hold for 3 sets
+            </h3>
             <p>
               Studies show that for stretching to be effective,stretch must be
-              held at least 30 seconds three times daily
+              held at least 30 seconds, three times daily
             </p>
           </div>
         </div>
       </section>
       {/* <div className="bigBox"> */}
-      <h1>Routine</h1>
+      <h1 className="exerciseTitle">Routine</h1>
       {/* <div className="tameBox">
           <YoutubeEmbed embedId="Sl19P-Xi2nY" />
         </div> */}
       {/* </div> */}
-      
-      {exerciseMap}
+      <Container className="exerciseContainer">
+        <Row>{exerciseMap}</Row>
+      </Container>
       <Button
+        className="resultsButton"
         variant="danger"
         onClick={(e) => {
           e.preventDefault();
-          
-          localStorage.getItem("exerciseEntered") ? navigate("/results") : (setModalShow(true))
+
+          localStorage.getItem("exerciseEntered")
+            ? navigate("/results")
+            : setModalShow(true);
         }}
       >
         See Your Results

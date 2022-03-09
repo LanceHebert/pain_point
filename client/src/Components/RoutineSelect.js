@@ -146,13 +146,13 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
     <div className="App-header">
     <Container className="pt-5" >
       <Row>
-        <Col>
+        <Col >
           {showSubmitPain ? (
             "Submitted ✔️"
           ) : (
             <>
               <Form className="routineForm">
-                <Form.Label>Select Current Pain level</Form.Label>
+                <Form.Label className="formLabelPain">Select Current Pain level</Form.Label>
                 <Form.Select
                   DefaultValue="0"
                   placeholder="Enter Pain level"
@@ -203,7 +203,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
           </Col>
         </Col>
 
-        <Col  >
+        <Col  className="pt-1 ">
           <Row >{mappedRoutines}</Row>
         </Col>
       </Row>
