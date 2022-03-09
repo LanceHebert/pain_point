@@ -152,7 +152,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
           ) : (
             <>
               <Form className="routineForm">
-                <Form.Label>Pain level</Form.Label>
+                <Form.Label>Select Current Pain level</Form.Label>
                 <Form.Select
                   DefaultValue="0"
                   placeholder="Enter Pain level"
@@ -187,11 +187,15 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
              
             </>
           )}
+<div>
           <Col lg={12} className="pt-5">
+            
           <Button className="routineButton" onClick={createNewRoutine} variant="success">
             Start New Exercise Session
           </Button>
+          
           </Col >
+          </div>
           <Col className="pt-5">
           <Button className="routineButton1" onClick={() => navigate("/results")} variant="warning">
             Go to Results Page
