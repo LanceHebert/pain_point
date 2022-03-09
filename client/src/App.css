@@ -8,7 +8,6 @@ img {
   width: 20%;
 }
 form {
-  text-align: left;
   background-color: #ffffc7;
   background-image: repeating-linear-gradient(white, #ffffc7);
   -webkit-box-shadow: 0 10px 6px -6px #777;
@@ -181,6 +180,53 @@ video {
   bottom: 0;
   width: 100%;
 }
-.RoutineCardWidth{
-  width:400px;
+
+.routineForm {
+  background-color: #233f8b;
+  background-image: none;
+  border-radius: 25px;
+  color: #ffffc7;
+  text-shadow: -1px 1px 1px #000, 1px 1px 2px #000, 1px -1px 0 #000,
+    -1px -1px 0 #000;
+  box-shadow: 0 10px 6px -6px #777;
+}
+.routineButtonHidden {
+  visibility: hidden;
+}
+.routineButton.routineButton {
+  width: 100%;
+  height: 15vh;
+  font-size: 2rem;
+  border-radius: 25px;
+  background: #1eae98;
+  box-shadow: 0 10px 6px -6px #777;
+  color: #ffffc7;
+  text-shadow: -1px 1px 1px #000, 1px 1px 2px #000, 1px -1px 0 #000,
+    -1px -1px 0 #000;
+  
+}
+.btn-success.btn-success:hover {
+  color: #ffffc7;
+  background-color: #0df0ce;
+}
+.routineButton1.routineButton1 {
+  width: 100%;
+  height: 15vh;
+  font-size: 2rem;
+  border-radius: 25px;
+  background: #a9f1df;
+  box-shadow: 0 10px 6px -6px #777;
+  color: #ffffc7;
+  text-shadow: -1px 1px 1px #000, 1px 1px 2px #000, 1px -1px 0 #000,
+    -1px -1px 0 #000;
+}
+.btn-warning.btn-warning:hover {
+  color: #ffffc7;
+  background-color: #0df0ce;
+}
+.routineCardHeader.routineCardHeader{
+  background: #233f8b;
+  color: #ffffc7;
+  text-shadow: -1px 1px 1px #000, 1px 1px 2px #000, 1px -1px 0 #000,
+    -1px -1px 0 #000;
 }

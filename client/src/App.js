@@ -59,7 +59,7 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto ">
               <Nav.Link href="/bodydiagram"  ><span className="navLink">Home</span></Nav.Link>
-              <Nav.Link href="/logout" className="navLink" onClick={handleLogoutClick}>
+              <Nav.Link href="/" className="navLink" onClick={handleLogoutClick}>
               <span className="navLink">Logout</span>
               </Nav.Link>
             </Nav>

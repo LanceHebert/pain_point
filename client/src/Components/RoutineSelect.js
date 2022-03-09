@@ -132,7 +132,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
 
   const mappedRoutines = routines.map((routine) => {
     return (
-      <Col lg={6} className="RoutineCardWidth"><RoutineCard
+      <Col lg={6}  className="pb-3 routineCard"><RoutineCard
         key={uuid()}
         routine={routine}
         routines={routines}
@@ -143,14 +143,15 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
   });
 
   return (
-    <Container>
+    <div className="App-header">
+    <Container className="pt-5" >
       <Row>
         <Col>
           {showSubmitPain ? (
             "Submitted ✔️"
           ) : (
             <>
-              <Form>
+              <Form className="routineForm">
                 <Form.Label>Pain level</Form.Label>
                 <Form.Select
                   DefaultValue="0"
@@ -172,9 +173,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
                   <option>9</option>
                   <option>10</option>
                 </Form.Select>
-              </Form>
-
-              <Button
+                <Button className="routineButtonHidden"
                 variant="primary"
                 onClick={(e) => {
                   e.preventDefault();
@@ -183,16 +182,21 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
               >
                 Submit
               </Button>
+              </Form>
+
+             
             </>
           )}
-
-          <Button onClick={createNewRoutine} variant="success">
+          <Col lg={12} className="pt-5">
+          <Button className="routineButton" onClick={createNewRoutine} variant="success">
             Start New Exercise Session
           </Button>
-
-          <Button onClick={() => navigate("/results")} variant="warning">
+          </Col >
+          <Col className="pt-5">
+          <Button className="routineButton1" onClick={() => navigate("/results")} variant="warning">
             Go to Results Page
           </Button>
+          </Col>
         </Col>
 
         <Col  >
@@ -201,7 +205,8 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
       </Row>
     </Container>
 
-    // </div>
+    
+    </div>
   );
 }
 

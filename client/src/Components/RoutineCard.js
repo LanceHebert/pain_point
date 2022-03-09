@@ -11,8 +11,8 @@ function RoutineCard({ routine,setRoutines,routines }) {
 
   return (
     <>
-      <Card>
-        <Card.Header>
+      <Card >
+        <Card.Header className="routineCardHeader">
           Session: {routine.routine} - {routine.muscle_group.region}
         </Card.Header>
         <Card.Body>
