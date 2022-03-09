@@ -132,74 +132,85 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
 
   const mappedRoutines = routines.map((routine) => {
     return (
-      <RoutineCard
+      <Col lg={6}  className="pb-3 routineCard"><RoutineCard
         key={uuid()}
         routine={routine}
         routines={routines}
         setRoutines={setRoutines}
       />
+      </Col>
     );
   });
 
   return (
-    <Container>
-      <Col>
-        {showSubmitPain ? (
-          "Submitted ✔️"
-        ) : (
-          <>
-            <Form>
-              <Form.Label>Pain level</Form.Label>
-              <Form.Select
-                DefaultValue="0"
-                placeholder="Enter Pain level"
-                onChange={(e) => {
+    <div className="App-header">
+    <Container className="pt-5" >
+      <Row>
+        <Col >
+          {showSubmitPain ? (
+            "Submitted ✔️"
+          ) : (
+            <>
+              <Form className="routineForm">
+                <Form.Label className="formLabelPain">Select Current Pain level</Form.Label>
+                <Form.Select
+                  DefaultValue="0"
+                  placeholder="Enter Pain level"
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setPainStatStore(parseInt(e.target.value));
+                  }}
+                >
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                </Form.Select>
+                <Button className="routineButtonHidden"
+                variant="primary"
+                onClick={(e) => {
                   e.preventDefault();
-                  setPainStatStore(parseInt(e.target.value));
+                  setShowSubmitPain(true);
                 }}
               >
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-              </Form.Select>
-            </Form>
+                Submit
+              </Button>
+              </Form>
 
-            <Button
-              variant="primary"
-              onClick={(e) => {
-                e.preventDefault();
-                setShowSubmitPain(true);
-              }}
-            >
-              Submit
-            </Button>
-          </>
-        )}
-      </Col>
-      <div>
-        <Button onClick={createNewRoutine} variant="success">
-          Start New Exercise Session
-        </Button>
-      </div>
+             
+            </>
+          )}
+<div>
+          <Col lg={12} className="pt-5">
+            
+          <Button className="routineButton" onClick={createNewRoutine} variant="success">
+            Start New Exercise Session
+          </Button>
+          
+          </Col >
+          </div>
+          <Col className="pt-5">
+          <Button className="routineButton1" onClick={() => navigate("/results")} variant="warning">
+            Go to Results Page
+          </Button>
+          </Col>
+        </Col>
 
-      <div>
-        <Button onClick={() => navigate("/results")} variant="warning">
-          Go to Results Page
-        </Button>
-      </div>
-
-      <div>{mappedRoutines}</div>
+        <Col  className="pt-1 ">
+          <Row >{mappedRoutines}</Row>
+        </Col>
+      </Row>
     </Container>
 
-    // </div>
+    
+    </div>
   );
 }
 

@@ -26,12 +26,7 @@ function LoginDecider({ setUser, handleLogoutClick }) {
       </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto  ">
-              <Nav.Link href="/bodydiagram"  ><span className="navLink">Home</span></Nav.Link>
-              <Nav.Link href="/" className="navLink" onClick={handleLogoutClick}>
-              <span className="navLink">Logout</span>
-              </Nav.Link>
-            </Nav>
+           
           </Navbar.Collapse>
         </Container>
       </Navbar>

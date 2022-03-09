@@ -15,9 +15,9 @@ import {
   Scatter,
   ComposedChart,
   Line,
-  
 } from "recharts";
-import { Spinner,Card } from "react-bootstrap";
+import { Spinner, Card, Container, Row, Col } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Results() {
   const [allInfoStore, setAllInfoStore] = useState([]);
@@ -26,6 +26,7 @@ function Results() {
   const [regionArr, setRegionArr] = useState([]);
   const [painData, setPainData] = useState([]);
   const [setsReps, setSetsReps] = useState([]);
+  const [totalExercises, setTotalExercises] = useState(0);
 
   useEffect(
     () =>
@@ -40,13 +41,44 @@ function Results() {
             );
           });
           // Invoking logic for each Chart
+          localStorage.setItem("initialPain", regionChosenFilter[0].pain);
+
           graphRPE(regionChosenFilter);
           graphPain(regionChosenFilter);
           graphRegion(allInfo);
           graphRepsSets(regionChosenFilter);
+          setAllInfoStore(allInfo);
+          checkResult(regionChosenFilter);
+          calcAvgExercise(allInfo);
+          
         }),
     []
   );
+
+  function calcAvgExercise() {
+    let tempHolder = 0;
+    // mapping through all sessions
+    if (allInfoStore.length > 1) {
+      allInfoStore.map((session, i) => {
+        tempHolder += session.exercises.length;
+      });
+      return (tempHolder / allInfoStore.length).toFixed(2);
+    }
+  }
+
+  function checkResult() {
+    if (allInfoStore.length > 0) {
+      return (
+        ((allInfoStore[allInfoStore.length - 1].pain -
+          parseInt(localStorage.getItem("initialPain"))) /
+          parseInt(localStorage.getItem("initialPain"))) *
+        100
+      );
+    } else {
+      return <Spinner animation="border" variant="primary" />;
+    }
+  }
+
   // Graph region PIE CHART   ********
 
   function graphRegion(allInfo) {
@@ -74,7 +106,7 @@ function Results() {
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
+  const renderCustomizedLabel =({
     cx,
     cy,
     midAngle,
@@ -87,8 +119,8 @@ function Results() {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    return (
-      <text
+     return (
+       <text
         x={x}
         y={y}
         fill="white"
@@ -122,7 +154,7 @@ function Results() {
   function graphPain(regionChosenFilter) {
     // console.log({ regionChosenFilter });
     const painArr = regionChosenFilter.map((instance, i) => {
-      return { session: i+1, pain: instance.pain };
+      return { session: i + 1, pain: instance.pain };
     });
     setPainData(painArr);
   }
@@ -138,7 +170,9 @@ function Results() {
       // map deeper into each set stats array to get RPE avg
       instance.set_stats.map((statInstance) => {
         setsHolder += statInstance.sets;
-        repsHolder += (statInstance.reps + statInstance.sets * 20)/(statInstance.sets + 1)
+        repsHolder +=
+          (statInstance.reps + statInstance.sets * 20) /
+          (statInstance.sets + 1);
       });
 
       let avgRepsPerSet = repsHolder / instance.set_stats.length;
@@ -158,128 +192,213 @@ function Results() {
   }
 
   return (
-    <div>
-      Results Page
-      <div>
-        <Card>
-        <ResponsiveContainer width="100%" height={400}>
-          <ComposedChart
-            width={500}
-            height={400}
-            data={painData}
-            margin={{
-              top: 20,
-              right: 20,
-              bottom: 20,
-              left: 20,
-            }}
-          >
-            <CartesianGrid stroke="#f5f5f5" />
-            <XAxis dataKey="session" scale="band" />
-            <YAxis domain={[1,  10]} />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="pain" barSize={20} fill="#413ea0" />
-            <Line type="monotone" dataKey="pain" stroke="#ff7300" />
-          </ComposedChart>
-        </ResponsiveContainer>
-        </Card>
-      </div>
-      <div>
-        <Card>
-        {data.length > 0 ? (
-          <ResponsiveContainer width="100%" height={400}>
-            <AreaChart data={data}>
-              <defs>
-                <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} />
-                  <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} />
-                </linearGradient>
-              </defs>
-              <Area dataKey="avgRPE" stroke="#2451B7" fill="url(#color)" />
-              <XAxis dataKey="session" />
-              <YAxis dataKey="avgRPE" domain={[1,  10]}/>
-              <Tooltip />
-              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-              <Legend />
-            </AreaChart>
-          </ResponsiveContainer>
-        ) : (
-          <Spinner animation="border" variant="primary" />
-        )}
-        </Card>
-      </div>
-      <div>
-        <Card>
-        <ResponsiveContainer width="100%" height={400}>
-          <PieChart width={400} height={400}>
-            <Pie
-              data={regionArr}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="sessions"
-            >
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Legend />
-          </PieChart>
-        </ResponsiveContainer>
-        </Card>
-      </div>
-      <div>
-        <Card>
-        <ResponsiveContainer width="100%" height={400}>
-          <AreaChart
-            width={500}
-            height={400}
-            data={setsReps}
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Area
-              type="monotone"
-              dataKey="avgTotalSets"
-              stackId="1"
-              stroke="#8884d8"
-              fill="#8884d8"
-            />
-            <Area
-              type="monotone"
-              dataKey="avgRepsPerSet"
-              stackId="1"
-              stroke="#82ca9d"
-              fill="#82ca9d"
-            />
-            {/* <Area
+    <div className="exerciseContainer">
+      <Container>
+        <Row className="pt-5">
+          <Col lg={6} className="">
+            <Card>
+              <h2 className="card-title">Regions Trained </h2>
+              {regionArr.length > 0  ? (
+                <ResponsiveContainer width="100%" height={400}>
+                  <PieChart width={400} height={400}>
+                    <Pie
+                      data={regionArr}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={renderCustomizedLabel}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="sessions"
+                    >
+                      {data.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              ) : (
+                <Spinner animation="border" variant="primary" />
+              )}
+            </Card>
+          </Col>
+          <Col>
+            <Col>
+              <Card className="mb-3 me-3 ms-3 p-2 ">
+                <h2 className="card-title">
+                  {" "}
+                  {allInfoStore.length > 0 ? (
+                    allInfoStore[allInfoStore.length - 1].date
+                  ) : (
+                    <Spinner animation="border" variant="primary" />
+                  )}
+                </h2>
+                <h3>Region Selected: {localStorage.getItem("region")}</h3>
+              </Card>
+            </Col>
+            <Col>
+              <Card className="m-3 p-2">
+                <h3>
+                  Initial Pain Level:{"  "}
+                  {parseInt(localStorage.getItem("initialPain"))}
+                </h3>
+
+                {allInfoStore.length > 0 ? (
+                  <h3>
+                    Current Pain Level:
+                    {allInfoStore[allInfoStore.length - 1].pain}
+                  </h3>
+                ) : (
+                  <Spinner animation="border" variant="primary" />
+                )}
+                <br />
+
+                {checkResult() > 1 ? (
+                  <h3 className="badResult">
+                    {checkResult()} % increase in pain
+                  </h3>
+                ) : (
+                  <>
+                    <h3 className="goodResult">
+                      <i className="fas fa-thumbs-up icon-format"></i>
+                      {checkResult()}% decrease in pain
+                    </h3>
+                  </>
+                )}
+              </Card>
+            </Col>
+            <Col>
+              <Card className="m-3 p-2">
+                <h3>
+                  {allInfoStore.length > 0 ? (
+                    allInfoStore.length
+                  ) : (
+                    <Spinner animation="border" variant="primary" />
+                  )}{" "}
+                  Total Sessions{" "}
+                </h3>
+                <h3>Average Exercises per Session: {calcAvgExercise()}</h3>
+              </Card>
+            </Col>
+          </Col>
+        </Row>
+
+        <Row className="pt-4 pb-3">
+          <h2 className="card-title">Session Stats</h2>
+          <Col className="p-1">
+            <Card>
+              <h2 className="card-title">Pain Level </h2>
+              <ResponsiveContainer width="100%" height={400}>
+                <ComposedChart
+                  width={500}
+                  height={400}
+                  data={painData}
+                  margin={{
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20,
+                  }}
+                >
+                  <CartesianGrid stroke="#f5f5f5" />
+                  <XAxis dataKey="session" scale="band" />
+                  <YAxis domain={[1, 10]} />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="pain" barSize={20} fill="#413ea0" />
+                  <Line type="monotone" dataKey="pain" stroke="#ff7300" />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </Card>
+          </Col>
+          <Col className="p-1">
+            <Card>
+              <h2 className="card-title">RPE Average </h2>
+              {data.length > 0 ? (
+                <ResponsiveContainer width="100%" height={400}>
+                  <AreaChart data={data}>
+                    <defs>
+                      <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
+                        <stop
+                          offset="0%"
+                          stopColor="#2451B7"
+                          stopOpacity={0.4}
+                        />
+                        <stop
+                          offset="75%"
+                          stopColor="#2451B7"
+                          stopOpacity={0.05}
+                        />
+                      </linearGradient>
+                    </defs>
+                    <Area
+                      dataKey="avgRPE"
+                      stroke="#2451B7"
+                      fill="url(#color)"
+                    />
+                    <XAxis dataKey="session" />
+                    <YAxis dataKey="avgRPE" domain={[1, 10]} />
+                    <Tooltip />
+                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                    <Legend />
+                  </AreaChart>
+                </ResponsiveContainer>
+              ) : (
+                <Spinner animation="border" variant="primary" />
+              )}
+            </Card>
+          </Col>
+          <Col className="p-1">
+            <Card>
+              <h2 className="card-title"> Reps and Sets </h2>
+              <ResponsiveContainer width="100%" height={400}>
+                <AreaChart
+                  width={500}
+                  height={400}
+                  data={setsReps}
+                  margin={{
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Area
+                    type="monotone"
+                    dataKey="avgTotalSets"
+                    stackId="1"
+                    stroke="#8884d8"
+                    fill="#8884d8"
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="avgRepsPerSet"
+                    stackId="1"
+                    stroke="#82ca9d"
+                    fill="#82ca9d"
+                  />
+                  {/* <Area
               type="monotone"
               dataKey="amt"
               stackId="1"
               stroke="#ffc658"
               fill="#ffc658"
             /> */}
-            <Legend />
-          </AreaChart>
-          
-        </ResponsiveContainer>
-        </Card>
-      </div>
+                  <Legend />
+                </AreaChart>
+              </ResponsiveContainer>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
