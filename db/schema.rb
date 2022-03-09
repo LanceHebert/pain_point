@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_002756) do
     t.boolean "advanced"
     t.integer "recreps"
     t.integer "recsets"
+    t.boolean "stretch"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["muscle_group_id"], name: "index_exercises_on_muscle_group_id"

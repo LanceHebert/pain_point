@@ -8,7 +8,7 @@ class CreateExercises < ActiveRecord::Migration[6.1]
       t.boolean :advanced
       t.integer :recreps
       t.integer :recsets
-
+      t.boolean :stretch
       t.timestamps
     end
   end

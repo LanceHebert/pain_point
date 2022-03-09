@@ -9,30 +9,45 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Sector,
+  Bar,
   Cell,
   Legend,
+  Scatter,
+  ComposedChart,
+  Line,
+  
 } from "recharts";
-import { Spinner } from "react-bootstrap";
+import { Spinner,Card } from "react-bootstrap";
 
 function Results() {
   const [allInfoStore, setAllInfoStore] = useState([]);
   const [processedData, setProcessedData] = useState([]);
   const [data, setData] = useState([]);
-  let dataObj = [];
   const [regionArr, setRegionArr] = useState([]);
+  const [painData, setPainData] = useState([]);
+  const [setsReps, setSetsReps] = useState([]);
 
   useEffect(
     () =>
       fetch("/routines")
         .then((r) => r.json())
         .then((allInfo) => {
-          graphRPE(allInfo);
+          // Filtering all sessions to just be the one with correct region
+          const regionChosenFilter = allInfo.filter((instance) => {
+            return (
+              instance.muscle_group.id ===
+              parseInt(localStorage.getItem("muscle_group_id"))
+            );
+          });
+          // Invoking logic for each Chart
+          graphRPE(regionChosenFilter);
+          graphPain(regionChosenFilter);
           graphRegion(allInfo);
-          console.log({ allInfo });
+          graphRepsSets(regionChosenFilter);
         }),
     []
   );
+  // Graph region PIE CHART   ********
 
   function graphRegion(allInfo) {
     const neck = allInfo.filter((instance) => {
@@ -47,7 +62,7 @@ function Results() {
     const knee = allInfo.filter((instance) => {
       return instance.muscle_group.region === "knee";
     });
-    console.log("neck", neck, "b", back, "s", shoulder, "k", knee.length);
+
     setRegionArr([
       { region: "Neck", sessions: neck.length },
       { region: "Back", sessions: back.length },
@@ -85,17 +100,8 @@ function Results() {
     );
   };
 
-  async function graphRPE(allInfo) {
-    // Filtering all sessions to just be the one with correct region
-    const regionChosenFilter = allInfo.filter((instance) => {
-      return (
-        instance.muscle_group.id ===
-        parseInt(localStorage.getItem("muscle_group_id"))
-      );
-    });
-
-    console.log({ regionChosenFilter });
-
+  // Graph RPE AREA CHART ******
+  async function graphRPE(regionChosenFilter) {
     let tempHolder = 0;
     // mapping through all sessions
     const hereBeData = regionChosenFilter.map((instance, i) => {
@@ -105,48 +111,82 @@ function Results() {
       });
 
       let avgRPE = tempHolder / instance.set_stats.length;
-      console.log({ avgRPE }, i + 1);
+      // console.log({ avgRPE }, i + 1);
       tempHolder = 0;
-      // setData([...data,{session: i + 1, avgRPE: avgRPE }])
-      return ({session: i + 1, avgRPE: avgRPE });
 
-      console.log(dataObj);
-      
-      // setProcessedData([...processedData,data])
-
+      return { session: i + 1, avgRPE: avgRPE };
     });
     setData(hereBeData);
-
   }
-  // old
-  // new
-  // function showGraph() {
-  //   return (
-  //     <ResponsiveContainer width="100%" height={400}>
-  //       <AreaChart data={data}>
-  //         <defs>
-  //           <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-  //             <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} />
-  //             <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} />
-  //           </linearGradient>
-  //         </defs>
-  //         <Area dataKey="avgRPE" stroke="#2451B7" fill="url(#color)" />
-  //         <XAxis dataKey="session" />
-  //         <YAxis dataKey="avgRPE" />
-  //         <Tooltip />
-  //         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-  //         <Legend />
-  //       </AreaChart>
-  //     </ResponsiveContainer>
-  //   );
-  // }
+  // Graph Pain Scatter Chart **************
+  function graphPain(regionChosenFilter) {
+    // console.log({ regionChosenFilter });
+    const painArr = regionChosenFilter.map((instance, i) => {
+      return { session: i+1, pain: instance.pain };
+    });
+    setPainData(painArr);
+  }
+
+  // Graph Reps and Sets chart ****************************
+  function graphRepsSets(regionChosenFilter) {
+    console.log({ regionChosenFilter });
+
+    let setsHolder = 0;
+    let repsHolder = 0;
+    // mapping through all sessions
+    const hereBeCombinedStatObj = regionChosenFilter.map((instance, i) => {
+      // map deeper into each set stats array to get RPE avg
+      instance.set_stats.map((statInstance) => {
+        setsHolder += statInstance.sets;
+        repsHolder += (statInstance.reps + statInstance.sets * 20)/(statInstance.sets + 1)
+      });
+
+      let avgRepsPerSet = repsHolder / instance.set_stats.length;
+      let avgTotalSets = setsHolder / instance.set_stats.length;
+
+      console.log({ avgRepsPerSet, avgTotalSets }, i + 1);
+      repsHolder = 0;
+      setsHolder = 0;
+
+      return {
+        session: i + 1,
+        avgRepsPerSet: avgRepsPerSet,
+        avgTotalSets: avgTotalSets,
+      };
+    });
+    setSetsReps(hereBeCombinedStatObj);
+  }
 
   return (
     <div>
       Results Page
       <div>
-        {/* {showGraph()} */}
-        {/* ( */}
+        <Card>
+        <ResponsiveContainer width="100%" height={400}>
+          <ComposedChart
+            width={500}
+            height={400}
+            data={painData}
+            margin={{
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 20,
+            }}
+          >
+            <CartesianGrid stroke="#f5f5f5" />
+            <XAxis dataKey="session" scale="band" />
+            <YAxis domain={[1,  10]} />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="pain" barSize={20} fill="#413ea0" />
+            <Line type="monotone" dataKey="pain" stroke="#ff7300" />
+          </ComposedChart>
+        </ResponsiveContainer>
+        </Card>
+      </div>
+      <div>
+        <Card>
         {data.length > 0 ? (
           <ResponsiveContainer width="100%" height={400}>
             <AreaChart data={data}>
@@ -158,7 +198,7 @@ function Results() {
               </defs>
               <Area dataKey="avgRPE" stroke="#2451B7" fill="url(#color)" />
               <XAxis dataKey="session" />
-              <YAxis dataKey="avgRPE" />
+              <YAxis dataKey="avgRPE" domain={[1,  10]}/>
               <Tooltip />
               <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
               <Legend />
@@ -167,10 +207,11 @@ function Results() {
         ) : (
           <Spinner animation="border" variant="primary" />
         )}
+        </Card>
       </div>
-      
       <div>
-        <ResponsiveContainer width={400} height={400}>
+        <Card>
+        <ResponsiveContainer width="100%" height={400}>
           <PieChart width={400} height={400}>
             <Pie
               data={regionArr}
@@ -192,6 +233,52 @@ function Results() {
             <Legend />
           </PieChart>
         </ResponsiveContainer>
+        </Card>
+      </div>
+      <div>
+        <Card>
+        <ResponsiveContainer width="100%" height={400}>
+          <AreaChart
+            width={500}
+            height={400}
+            data={setsReps}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 0,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Area
+              type="monotone"
+              dataKey="avgTotalSets"
+              stackId="1"
+              stroke="#8884d8"
+              fill="#8884d8"
+            />
+            <Area
+              type="monotone"
+              dataKey="avgRepsPerSet"
+              stackId="1"
+              stroke="#82ca9d"
+              fill="#82ca9d"
+            />
+            {/* <Area
+              type="monotone"
+              dataKey="amt"
+              stackId="1"
+              stroke="#ffc658"
+              fill="#ffc658"
+            /> */}
+            <Legend />
+          </AreaChart>
+          
+        </ResponsiveContainer>
+        </Card>
       </div>
     </div>
   );

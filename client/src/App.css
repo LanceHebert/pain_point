@@ -1,13 +1,34 @@
 .App {
   text-align: center;
 }
-
+body {
+  color: #ffffc7;
+}
 img {
   width: 20%;
 }
-
+form {
+  text-align: left;
+  background-color: #ffffc7;
+  background-image: repeating-linear-gradient(white, #ffffc7);
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+}
+.color-nav {
+  background-color: #152756;
+  background-image: repeating-linear-gradient(#233e8b, #152756);
+}
+.navLink {
+  color: #ffffc7;
+}
+.navTitle {
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #ffffc7;
+}
 .App-header {
-  background-color: #282c34;
+  background-color: #ffffc7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -15,16 +36,21 @@ img {
   justify-content: center;
   font-size: calc(14px + 2vmin);
   color: black;
+  background-color: "";
 }
-
-form {
-  text-align: left;
-  background-color: white;
-  box-shadow: 5px, 5px, 5px rgba(0, 0, 0, 0.2);
+.App-headerColor {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(14px + 2vmin);
+  color: black;
+  background-color: "";
 }
 
 .checky {
-  font-size: calc(6px + 2vmin);
+  font-size: calc(6px + 1.2vmin);
 }
 .signErrors {
   font-size: calc(2px + 2vmin);
@@ -34,7 +60,7 @@ form {
 }
 
 .BodyTitle {
-  color: white;
+  color: #233e8b;
 }
 .grow {
   transition: all 0.1s ease-in-out;
@@ -89,4 +115,69 @@ form {
 }
 video {
   opacity: 0.5;
+}
+#video-background {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  /* width: 100%;
+  height: auto; */
+}
+.astext {
+  color: grey;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.asTextBold {
+  color: #1d04ff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.titleCard {
+  text-align: center;
+  padding-bottom: 20px;
+}
+.loginButton {
+  width: 100%;
+}
+.logo {
+  color: white;
+}
+.shadow {
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+}
+#root > div > div > div > div > button {
+  width: 100%;
+  border-radius: 25px;
+}
+.splashCard {
+  width: 50%;
+  text-shadow: -1px 1px 1px #000, 1px 1px 2px #000, 1px -1px 0 #000,
+    -1px -1px 0 #000;
+
+  color: #ffffc7;
+  border-radius: 25px;
+  border: 2px transparent;
+  background-color: #233f8b9e;
+  background-image: repeating-linear-gradient(#15275627, #233f8b29);
+}
+.navbar.navbar {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+.switchButton {
+  width: 30%;
+}
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

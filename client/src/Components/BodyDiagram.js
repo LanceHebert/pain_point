@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { useNavigate } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
 
 function BodyDiagram({
   setRegionSelected,
@@ -10,12 +11,16 @@ function BodyDiagram({
 }) {
   let navigate = useNavigate();
   const [muscleID, setMuscleID] = useState([]);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     localStorage.clear();
     fetch("/muscle_groups")
       .then((r) => r.json())
       .then((muscles) => {
+        
         setMuscleID(muscles);
       });
   }, []);
@@ -39,9 +44,10 @@ function BodyDiagram({
   }
 
   return (
-    <div className="App-header">
+    <div className="App-header">     
+      
       <div>
-        <h1 className="BodyTitle">Point to your pain</h1>
+        <h2 className="BodyTitle">Point to your pain</h2>
         <div>
           <img
             className="grow"
@@ -74,8 +80,10 @@ function BodyDiagram({
           id="shoulder"
           onClick={(e) => handleImgClick(e)}
         />
-      </div>
+      </div >
+      <div className="switchButton">
       <BootstrapSwitchButton
+      
         checked={false}
         onlabel="Advanced exercises"
         onstyle="danger"
@@ -88,11 +96,14 @@ function BodyDiagram({
           setButtonValue(!buttonValue);
         }}
       />
+      </div>
+      <div id="footer">
       <h6>
         <a href="https://www.vecteezy.com/free-vector/body-pain">
           Body Pain Vectors by Vecteezy
         </a>
       </h6>
+      </div>
     </div>
   );
 }

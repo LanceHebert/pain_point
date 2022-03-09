@@ -52,15 +52,16 @@ function ExerciseCard({
           <h2 className="card-title">{exercise.name}</h2>
           <p className="card-text">{exercise.description}</p>
           <p>
-            Recommended sets: {exercise.recsets} x {exercise.recreps} times
+            Recommended sets: <br />
+             {exercise.recreps} reps for {exercise.recsets} sets 
           </p>
           {showExercise ? (
             <>
-              <p>How did you do?</p>
+              <p>Based on the Recommended sets, how did you do?</p>
               <Form>
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formGridSets">
-                    <Form.Label>Sets Completed</Form.Label>
+                    <Form.Label>Completed Recommended Sets </Form.Label>
                     <Form.Control
                       type="number"
                       placeholder="Enter Sets"
@@ -75,7 +76,7 @@ function ExerciseCard({
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formGridReps">
-                    <Form.Label>Last Reps Completed</Form.Label>
+                    <Form.Label># of reps of incomplete set</Form.Label>
                     <Form.Control
                       type="number"
                       placeholder="Enter Reps"

@@ -1,23 +1,34 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 
-function RoutineCard({ routine }) {
-  console.log(routine);
-  return (
-      <>
-   
+function RoutineCard({ routine,setRoutines,routines }) {
+  console.log({ routine });
+  function handleDelete() {
+    fetch(`/routines/${routine.id}`, {
+      method: "DELETE",
+    }).then(() => setRoutines(routines.filter(rInstance=>rInstance.id!==routine.id)));
+  }
 
+  return (
+    <>
       <Card>
         <Card.Header>
           Session: {routine.routine} - {routine.muscle_group.region}
         </Card.Header>
         <Card.Body>
           <Card.Title>{routine.date}</Card.Title>
-       
-        <Button variant="danger">Delete</Button>
+
+          <Button
+            variant="danger"
+            onClick={(e) => {
+              handleDelete(e);
+            }}
+          >
+            Delete
+          </Button>
         </Card.Body>
       </Card>
-      </>
+    </>
   );
 }
 

@@ -129,7 +129,7 @@ function Exercises({ regionSelected, setRegionSelected }) {
         onClick={(e) => {
           e.preventDefault();
           
-          localStorage.getItem("exerciseEntered") ? navigate("/results") : setModalShow(true) 
+          localStorage.getItem("exerciseEntered") ? navigate("/results") : (setModalShow(true))
         }}
       >
         See Your Results
