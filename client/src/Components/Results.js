@@ -12,21 +12,20 @@ import {
   Bar,
   Cell,
   Legend,
-  Scatter,
+  
   ComposedChart,
   Line,
 } from "recharts";
 import { Spinner, Card, Container, Row, Col } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Results() {
   const [allInfoStore, setAllInfoStore] = useState([]);
-  const [processedData, setProcessedData] = useState([]);
+  
   const [data, setData] = useState([]);
   const [regionArr, setRegionArr] = useState([]);
   const [painData, setPainData] = useState([]);
   const [setsReps, setSetsReps] = useState([]);
-  const [totalExercises, setTotalExercises] = useState(0);
+  
 
   useEffect(
     () =>
@@ -50,7 +49,6 @@ function Results() {
           setAllInfoStore(allInfo);
           checkResult(regionChosenFilter);
           calcAvgExercise(allInfo);
-          
         }),
     []
   );
@@ -73,7 +71,7 @@ function Results() {
           parseInt(localStorage.getItem("initialPain"))) /
           parseInt(localStorage.getItem("initialPain"))) *
         100
-      );
+      ).toFixed(2);
     } else {
       return <Spinner animation="border" variant="primary" />;
     }
@@ -106,7 +104,7 @@ function Results() {
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel =({
+  const renderCustomizedLabel = ({
     cx,
     cy,
     midAngle,
@@ -119,8 +117,8 @@ function Results() {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-     return (
-       <text
+    return (
+      <text
         x={x}
         y={y}
         fill="white"
@@ -143,7 +141,7 @@ function Results() {
       });
 
       let avgRPE = tempHolder / instance.set_stats.length;
-      // console.log({ avgRPE }, i + 1);
+
       tempHolder = 0;
 
       return { session: i + 1, avgRPE: avgRPE };
@@ -152,7 +150,6 @@ function Results() {
   }
   // Graph Pain Scatter Chart **************
   function graphPain(regionChosenFilter) {
-    // console.log({ regionChosenFilter });
     const painArr = regionChosenFilter.map((instance, i) => {
       return { session: i + 1, pain: instance.pain };
     });
@@ -198,7 +195,7 @@ function Results() {
           <Col lg={6} className="">
             <Card>
               <h2 className="card-title">Regions Trained </h2>
-              {regionArr.length > 0  ? (
+              {regionArr.length > 0 ? (
                 <ResponsiveContainer width="100%" height={400}>
                   <PieChart width={400} height={400}>
                     <Pie
@@ -218,13 +215,13 @@ function Results() {
                         />
                       ))}
                     </Pie>
-                    <Legend />
+                    <Legend  />
                   </PieChart>
                 </ResponsiveContainer>
               ) : (
                 <Spinner animation="border" variant="primary" />
               )}
-              <h5>0=Neck 1=Shoulder 2=Back 3=Knee</h5>
+              <h5><span className="neck">Neck</span> <span className="shoulder">Shoulder</span> <span className="back">Back</span> <span className="knee">Knee</span></h5>
             </Card>
           </Col>
           <Col>
@@ -386,13 +383,7 @@ function Results() {
                     stroke="#82ca9d"
                     fill="#82ca9d"
                   />
-                  {/* <Area
-              type="monotone"
-              dataKey="amt"
-              stackId="1"
-              stroke="#ffc658"
-              fill="#ffc658"
-            /> */}
+
                   <Legend />
                 </AreaChart>
               </ResponsiveContainer>

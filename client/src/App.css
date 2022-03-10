@@ -1,3 +1,6 @@
+* {
+  font-family: "Libre Baskerville", serif;
+}
 .App {
   text-align: center;
 }
@@ -14,6 +17,18 @@ form {
   -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;
   padding: 5px;
+}
+span.neck {
+  color: #0088fe;
+}
+span.back {
+  color: #FFBB28;
+}
+span.shoulder {
+  color: #00C49F;
+}
+span.knee {
+  color: #FF8042;
 }
 i {
   font-size: 64px;
@@ -135,13 +150,15 @@ video {
   opacity: 0.5;
 }
 #video-background {
-  position: absolute;
+  position: fixed;
   z-index: -1;
   top: 0;
   left: 0;
   opacity: 1;
-  /* width: 100%;
-  height: auto; */
+
+  /* background-size: cover; */
+  width: auto;
+  /* height: 100%;    */
 }
 .astext {
   color: grey;

@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import YoutubeEmbed from "./YoutubeEmbed";
 import ExerciseCard from "./ExerciseCard";
 import uuid from "react-uuid";
-import { Button, Form, Modal, Container, Row, Col } from "react-bootstrap";
+import { Button,  Modal, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Exercises({ regionSelected, setRegionSelected }) {
   const [exerciseStore, setExerciseStore] = useState([]);
   const isTrueSet = localStorage.getItem("advancedBackup") === "true";
-  // const [exerciseEntered,setExerciseEntered] = useState(false)
+
   const [modalShow, setModalShow] = useState(false);
 
   let navigate = useNavigate();
@@ -48,20 +47,10 @@ function Exercises({ regionSelected, setRegionSelected }) {
           key={uuid()}
           exercise={exercise}
           regionSelected={regionSelected}
-          // setExerciseEntered={setExerciseEntered}
         />
       </Col>
     );
   });
-  // function handleSubmitPain() {
-  //   fetch("/routines", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(painStatStore),
-  //   })
-  //     .then((r) => r.json())
-  //     .then((returnPostData) => console.log(returnPostData));
-  // }
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -73,7 +62,7 @@ function Exercises({ regionSelected, setRegionSelected }) {
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <h4>Error</h4>
+          <h4 style={{color: "red" }}>Error</h4>
           <p>
             Must fill out and submit at least one exercise for this session.
           </p>
@@ -119,12 +108,9 @@ function Exercises({ regionSelected, setRegionSelected }) {
           </div>
         </div>
       </section>
-      {/* <div className="bigBox"> */}
+
       <h1 className="exerciseTitle">Routine</h1>
-      {/* <div className="tameBox">
-          <YoutubeEmbed embedId="Sl19P-Xi2nY" />
-        </div> */}
-      {/* </div> */}
+
       <Container className="exerciseContainer">
         <Row>{exerciseMap}</Row>
       </Container>

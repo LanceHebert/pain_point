@@ -2,7 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginDecider from "./Components/LoginDecider";
 import { useEffect, useState } from "react";
-import { Routes, Route,useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { Nav, Container, Navbar } from "react-bootstrap";
 import BodyDiagram from "./Components/BodyDiagram";
 import Exercises from "./Components/Exercises";
@@ -32,10 +32,9 @@ function App() {
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
-      // debugger;
-      setUser(null);
-      localStorage.clear();
-      navigate("/")
+        setUser(null);
+        localStorage.clear();
+        navigate("/");
       }
     });
   }
@@ -51,7 +50,6 @@ function App() {
               alt=""
               src="/images/logoWhite.png"
               width="20"
-              // height="30"
               className="d-inline-block align-top logo"
             />
             <span className="navTitle">Pain Point</span>
