@@ -135,13 +135,15 @@ video {
   opacity: 0.5;
 }
 #video-background {
-  position: absolute;
+  position: fixed;
   z-index: -1;
   top: 0;
   left: 0;
   opacity: 1;
-  /* width: 100%;
-  height: auto; */
+
+  /* background-size: cover; */
+    width: auto;
+  /* height: 100%;    */
 }
 .astext {
   color: grey;
