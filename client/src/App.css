@@ -30,10 +30,14 @@ span.shoulder {
 span.knee {
   color: #FF8042;
 }
+span.empty{
+  color:#8884d8;
+}
 i {
   font-size: 64px;
   padding-bottom: 50px;
 }
+
 h2.card-title {
   color: #152756;
   font-size: 50px;
@@ -209,7 +213,7 @@ video {
   padding-bottom: 0.2rem;
 }
 .switchButton {
-  width: 30%;
+  width: 50%;
 }
 #footer {
   position: fixed;
