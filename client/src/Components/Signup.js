@@ -31,9 +31,8 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
   return (
     <div className="loginForm">
       <Form className="rounded p-4 p-sm-3 ">
-      <h2 className="titleCard">Register</h2>
+        <h2 className="titleCard">Register</h2>
         <Form.Group className="mb-3 shadow" controlId="formBasicUsername">
-          {/* <Form.Label>Username</Form.Label> */}
           <Form.Control
             type="text"
             placeholder="Enter Username"
@@ -43,7 +42,6 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
           />
         </Form.Group>
         <Form.Group className="mb-3 shadow" controlId="formBasicPassword">
-          {/* <Form.Label>Password</Form.Label> */}
           <Form.Control
             type="password"
             id="password"
@@ -53,8 +51,10 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
             }
           />
         </Form.Group>
-        <Form.Group className="mb-3 shadow" controlId="formBasicPasswordConfirmation">
-          {/* <Form.Label>Password Confirmation</Form.Label> */}
+        <Form.Group
+          className="mb-3 shadow"
+          controlId="formBasicPasswordConfirmation"
+        >
           <Form.Control
             type="password"
             placeholder="Re-Enter Password"

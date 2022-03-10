@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-// import { Link } from "react-router-dom";
 
 function Login({
   setShowLogin,
@@ -39,7 +38,6 @@ function Login({
       <Form className="rounded p-4 p-sm-3 ">
         <h2 className="titleCard">LOGIN</h2>
         <Form.Group className="mb-3 shadow" controlId="formBasicUsername">
-          {/* <Form.Label>Username</Form.Label> */}
           <Form.Control
             type="text"
             placeholder="Enter Username"
@@ -49,7 +47,6 @@ function Login({
           />
         </Form.Group>
         <Form.Group className="mb-3 shadow" controlId="formBasicPassword">
-          {/* <Form.Label>Password</Form.Label> */}
           <Form.Control
             type="password"
             placeholder="Enter Password"
@@ -70,13 +67,6 @@ function Login({
           >
             {isLoading ? "Loading..." : "Login"}
           </Button>
-          {/* <Button
-            color="primary"
-            className="ms-5"
-            onClick={() => setShowLogin(false)}
-          >
-            SignUp
-          </Button> */}
         </div>
         <Form.Group className="errors rounded" controlId="formBasicErrors">
           {errors.map((err) => (

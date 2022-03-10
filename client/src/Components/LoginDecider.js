@@ -10,29 +10,25 @@ function LoginDecider({ setUser, handleLogoutClick }) {
 
   return (
     <div>
-    
-    <Navbar className="color-nav  justify-content-start"   expand="lg">
+      <Navbar className="color-nav  justify-content-start" expand="lg">
         <Container>
-        <Navbar.Brand href="/">
-        <img
-          alt=""
-          src="/images/logoWhite.png"
-          width="20"
-          // height="30"
-          className="d-inline-block align-top logo"
-        /><span className="navTitle">
-      Pain Point
-      </span>
-      </Navbar.Brand>
+          <Navbar.Brand href="/">
+            <img
+              alt=""
+              src="/images/logoWhite.png"
+              width="20"
+              // height="30"
+              className="d-inline-block align-top logo"
+            />
+            <span className="navTitle">Pain Point</span>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-           
-          </Navbar.Collapse>
+          <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
         </Container>
       </Navbar>
 
       {showLogin ? (
-        <div>          
+        <div>
           <video autoPlay loop id="video-background" muted>
             <source src="/videos/runningVid.mp4" type="video/mp4" />
           </video>
@@ -47,17 +43,19 @@ function LoginDecider({ setUser, handleLogoutClick }) {
             />
           </div>
         </div>
-      ) : (<div><video autoPlay loop id="video-background" muted>
-      <source src="/videos/runningVid.mp4" type="video/mp4" />
-    </video>
-        <div className="App-headerColor">
-          <Signup
-            setUser={setUser}
-            setIsLoading={setIsLoading}
-            setErrors={setErrors}
-            errors={errors}
-            isLoading={isLoading}
-          />
+      ) : (
+        <div>
+          <video autoPlay loop id="video-background" muted>
+            <source src="/videos/runningVid.mp4" type="video/mp4" />
+          </video>
+          <div className="App-headerColor">
+            <Signup
+              setUser={setUser}
+              setIsLoading={setIsLoading}
+              setErrors={setErrors}
+              errors={errors}
+              isLoading={isLoading}
+            />
           </div>
         </div>
       )}

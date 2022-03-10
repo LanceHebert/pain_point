@@ -3,14 +3,7 @@ import { Row, Col, Button, Form } from "react-bootstrap";
 import YoutubeEmbed from "./YoutubeEmbed";
 import { useNavigate } from "react-router-dom";
 
-function ExerciseCard({
-  exercise,
-  setExerciseEntered,
-  // regionSelected,
-  // handleSubmitExercise,
-  // exerciseStatStore,
-  // setExerciseStatStore,
-}) {
+function ExerciseCard({ exercise, setExerciseEntered }) {
   let navigate = useNavigate();
 
   const [newExercise, setNewExercise] = useState({
@@ -29,8 +22,6 @@ function ExerciseCard({
     setShowSubmitExercise(false);
   }
   function handleSubmitExercise() {
-    // setExerciseStatStore([...exerciseStatStore, newExercise]);
-
     fetch("/set_stats", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -38,13 +29,13 @@ function ExerciseCard({
     })
       .then((r) => r.json())
       .then((returnPostData) => {
-        localStorage.setItem("exerciseEntered",true)
+        localStorage.setItem("exerciseEntered", true);
         console.log(returnPostData);
       });
   }
 
   return (
-    <div >
+    <div>
       <div className="card">
         <YoutubeEmbed embedId={exercise.videoEmbed} />
 
@@ -53,11 +44,13 @@ function ExerciseCard({
           <p className="card-text">{exercise.description}</p>
           <p className="pSmallPrint">
             Recommended sets: <br />
-             {exercise.recreps} reps for {exercise.recsets} sets 
-          </p >
+            {exercise.recreps} reps for {exercise.recsets} sets
+          </p>
           {showExercise ? (
             <>
-              <p className="card-text">Based on the Recommended sets, how did you do?</p>
+              <p className="card-text">
+                Based on the Recommended sets, how did you do?
+              </p>
               <Form id="alternateGradient">
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formGridSets">
@@ -168,27 +161,3 @@ function ExerciseCard({
 }
 
 export default ExerciseCard;
-
-{
-  /* <iframe
-          title={exercise.videoEmbed}
-          src={`https://www.youtube.com/embed/${exercise.videoEmbed}`}
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe> */
-}
-{
-  /* <Card className="text-center">
-        <Card.Header>Featured</Card.Header>
-        <Card.Body>
-          <Card.Title>Special title treatment</Card.Title>
-          <Card.Text>
-            With supporting text below as a natural lead-in to additional
-            content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-        <Card.Footer className="text-muted">2 days ago</Card.Footer>
-      </Card> */
-}
