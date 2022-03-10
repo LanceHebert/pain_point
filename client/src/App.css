@@ -1,11 +1,10 @@
-*{
-  font-family: 'Libre Baskerville', serif;
+* {
+  font-family: "Libre Baskerville", serif;
 }
 .App {
   text-align: center;
 }
 body {
-  
   color: #ffffc7;
 }
 img {
@@ -18,6 +17,18 @@ form {
   -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;
   padding: 5px;
+}
+span.neck {
+  color: #0088fe;
+}
+span.back {
+  color: #FFBB28;
+}
+span.shoulder {
+  color: #00C49F;
+}
+span.knee {
+  color: #FF8042;
 }
 i {
   font-size: 64px;
@@ -146,7 +157,7 @@ video {
   opacity: 1;
 
   /* background-size: cover; */
-    width: auto;
+  width: auto;
   /* height: 100%;    */
 }
 .astext {

@@ -215,13 +215,13 @@ function Results() {
                         />
                       ))}
                     </Pie>
-                    <Legend />
+                    <Legend  />
                   </PieChart>
                 </ResponsiveContainer>
               ) : (
                 <Spinner animation="border" variant="primary" />
               )}
-              <h5>0=Neck 1=Shoulder 2=Back 3=Knee</h5>
+              <h5><span className="neck">Neck</span> <span className="shoulder">Shoulder</span> <span className="back">Back</span> <span className="knee">Knee</span></h5>
             </Card>
           </Col>
           <Col>
