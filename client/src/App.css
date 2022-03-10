@@ -43,14 +43,15 @@ h2.card-title {
   font-size: 50px;
   text-shadow: -1px 1px 2px white, 1px 1px 2px white, 1px -1px 0 white,
     -1px -1px 0 white;
+   
 }
 p.pSmallPrint {
   color: red;
-  font-size: 20px;
+  font-size: 16px;
   text-shadow: -1px 1px 2px black;
 }
 p.card-text {
-  font-size: 24px;
+  font-size: 20px;
   text-shadow: -1px 1px 2px white;
 }
 .color-nav {
@@ -269,6 +270,7 @@ video {
   color: #ffffc7;
   text-shadow: -1px 1px 1px #000, 1px 1px 2px #000, 1px -1px 0 #000,
     -1px -1px 0 #000;
+  font-size:30px;
 }
 .exerciseTitle {
   font-size: 64px;
@@ -286,10 +288,11 @@ video {
   margin: 0;
 }
 
-.card-body {
+.card-body.card-body {
   background-color: #1eae98;
   color: black;
   border-style: outset;
+  /* height: 500px; */
   /* color: white; */
   /* font-size: 40px; */
 }
@@ -328,4 +331,8 @@ label.form-label.formLabelPain {
 }
 div.m-2. {
   margin-top: 0;
+}
+#cardSizing{
+  margin-bottom:50px;
+  height:200px;
 }
