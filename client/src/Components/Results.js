@@ -224,6 +224,7 @@ function Results() {
               ) : (
                 <Spinner animation="border" variant="primary" />
               )}
+              <h5>0=Neck 1=Shoulder 2=Back 3=Knee</h5>
             </Card>
           </Col>
           <Col>
