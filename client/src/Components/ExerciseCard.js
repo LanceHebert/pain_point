@@ -3,7 +3,7 @@ import { Row, Col, Button, Form } from "react-bootstrap";
 import YoutubeEmbed from "./YoutubeEmbed";
 import { useNavigate } from "react-router-dom";
 
-function ExerciseCard({ exercise, setExerciseEntered }) {
+function ExerciseCard({ exercise }) {
   let navigate = useNavigate();
 
   const [newExercise, setNewExercise] = useState({
@@ -16,11 +16,12 @@ function ExerciseCard({ exercise, setExerciseEntered }) {
   });
   const [showExercise, setShowExercise] = useState(false);
   const [showSubmitExercise, setShowSubmitExercise] = useState(false);
-
+// When invoked opens up form to show more inputs
   function showExerciseForm() {
     setShowExercise(true);
     setShowSubmitExercise(false);
   }
+  // Posting to backend the exercise stats entered
   function handleSubmitExercise() {
     fetch("/set_stats", {
       method: "POST",
@@ -46,6 +47,7 @@ function ExerciseCard({ exercise, setExerciseEntered }) {
             Recommended sets: <br />
             {exercise.recreps} reps for {exercise.recsets} sets
           </p>
+          {/* Ternary to show if user decided to start exercise */}
           {showExercise ? (
             <>
               <p className="card-text">

@@ -12,7 +12,7 @@ import {
   Bar,
   Cell,
   Legend,
-  Scatter,
+  
   ComposedChart,
   Line,
 } from "recharts";
@@ -20,12 +20,12 @@ import { Spinner, Card, Container, Row, Col } from "react-bootstrap";
 
 function Results() {
   const [allInfoStore, setAllInfoStore] = useState([]);
-  const [processedData, setProcessedData] = useState([]);
+  
   const [data, setData] = useState([]);
   const [regionArr, setRegionArr] = useState([]);
   const [painData, setPainData] = useState([]);
   const [setsReps, setSetsReps] = useState([]);
-  const [totalExercises, setTotalExercises] = useState(0);
+  
 
   useEffect(
     () =>
@@ -71,7 +71,7 @@ function Results() {
           parseInt(localStorage.getItem("initialPain"))) /
           parseInt(localStorage.getItem("initialPain"))) *
         100
-      );
+      ).toFixed(2);
     } else {
       return <Spinner animation="border" variant="primary" />;
     }

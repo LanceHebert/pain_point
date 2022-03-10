@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { useNavigate } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+
 
 function BodyDiagram({
   setRegionSelected,
@@ -11,10 +11,9 @@ function BodyDiagram({
 }) {
   let navigate = useNavigate();
   const [muscleID, setMuscleID] = useState([]);
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  
+  
+// Fetching muscle groups 
   useEffect(() => {
     localStorage.clear();
     fetch("/muscle_groups")
@@ -24,6 +23,7 @@ function BodyDiagram({
       });
   }, []);
 
+  // Clearing Local storage when coming back to Body Diagram page,setting region selected state and storing in local storage as well
   function handleImgClick(e) {
     localStorage.clear();
 
@@ -37,6 +37,8 @@ function BodyDiagram({
       "muscle_group_id",
       muscleID.find((muscle) => muscle.region === e.target.id).id
     );
+
+    // on image click send to next page routines
     navigate(`/routines/`);
   }
 
@@ -77,6 +79,7 @@ function BodyDiagram({
           onClick={(e) => handleImgClick(e)}
         />
       </div>
+      {/* Cool light switch type button, stores if workout is advanced or novice */}
       <div className="switchButton">
         <BootstrapSwitchButton
           checked={false}

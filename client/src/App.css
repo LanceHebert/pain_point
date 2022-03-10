@@ -1,7 +1,11 @@
+*{
+  font-family: 'Libre Baskerville', serif;
+}
 .App {
   text-align: center;
 }
 body {
+  
   color: #ffffc7;
 }
 img {

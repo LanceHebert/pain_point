@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import YoutubeEmbed from "./YoutubeEmbed";
 import ExerciseCard from "./ExerciseCard";
 import uuid from "react-uuid";
-import { Button, Form, Modal, Container, Row, Col } from "react-bootstrap";
+import { Button,  Modal, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
