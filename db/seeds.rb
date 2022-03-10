@@ -144,7 +144,10 @@ SetStat.create!(routine_id:s3.id,exercise_id:e8.id,reps:13,tband:"yellow",sets:2
 SetStat.create!(routine_id:s4.id,exercise_id:e1.id,reps:15,tband:"black",sets:3,RPE:8) 
 SetStat.create!(routine_id:s4.id,exercise_id:e2.id,reps:20,tband:"black",sets:2,RPE:2) 
 SetStat.create!(routine_id:s4.id,exercise_id:e3.id,reps:15,tband:"black",sets:3,RPE:8) 
-SetStat.create!(routine_id:s4.id,exercise_id:e4.id,reps:20,tband:"black",sets:2,RPE:2) 
+SetStat.create!(routine_id:s4.id,exercise_id:e4.id,reps:20,tband:"black",sets:2,RPE:2)
+SetStat.create!(routine_id:s5.id,exercise_id:e4.id,reps:20,tband:"black",sets:2,RPE:2)
+SetStat.create!(routine_id:s6.id,exercise_id:e4.id,reps:20,tband:"black",sets:2,RPE:2)
+SetStat.create!(routine_id:s7.id,exercise_id:e4.id,reps:20,tband:"black",sets:2,RPE:2) 
  
 
 puts "🙏🙏Cooldown fully seeded!🙏🙏"
