@@ -32,7 +32,7 @@ function Exercises({ regionSelected, setRegionSelected }) {
       }),
     []
   );
-
+// Check to make sure Region exercises are equal to muscle group even on page refresh
   const filterRegionExercises = exerciseStore.filter(
     (exercise) =>
       (regionSelected.name === exercise.muscle_group.region ||
