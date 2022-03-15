@@ -39,14 +39,17 @@ function ExerciseCard({ exercise }) {
     <div>
       <div className="card">
         <YoutubeEmbed embedId={exercise.videoEmbed} />
-
+        <div id="extraControl">
         <div className="card-body">
           <h2 className="card-title">{exercise.name}</h2>
+          <div id="cardSizing">
           <p className="card-text">{exercise.description}</p>
+          </div>
           <p className="pSmallPrint">
             Recommended sets: <br />
             {exercise.recreps} reps for {exercise.recsets} sets
           </p>
+          
           {/* Ternary to show if user decided to start exercise */}
           {showExercise ? (
             <>
@@ -156,6 +159,7 @@ function ExerciseCard({ exercise }) {
               Start Exercise
             </Button>
           )}
+          </div>
         </div>
       </div>
     </div>

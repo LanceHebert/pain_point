@@ -32,6 +32,7 @@ function Results() {
       fetch("/routines")
         .then((r) => r.json())
         .then((allInfo) => {
+          setAllInfoStore(allInfo);
           // Filtering all sessions to just be the one with correct region
           const regionChosenFilter = allInfo.filter((instance) => {
             return (
@@ -46,13 +47,24 @@ function Results() {
           graphPain(regionChosenFilter);
           graphRegion(allInfo);
           graphRepsSets(regionChosenFilter);
-          setAllInfoStore(allInfo);
+          
           checkResult(regionChosenFilter);
           calcAvgExercise(allInfo);
+          reverseDate();
         }),
     []
   );
 
+
+  function reverseDate(){
+    // console.log("Here",allInfoStore[allInfoStore.length - 1]);
+    if (allInfoStore.length >= 1)
+    {
+     const splitDate =  allInfoStore[allInfoStore.length - 1].date.split('-')
+     const newDate =  splitDate[1]+ '-' + splitDate[2] + '-' + splitDate[0];
+      return newDate
+    }
+  }
   function calcAvgExercise() {
     let tempHolder = 0;
     // mapping through all sessions
@@ -94,10 +106,10 @@ function Results() {
     });
 
     setRegionArr([
-      { region: "Neck", sessions: neck.length },
-      { region: "Back", sessions: back.length },
-      { region: "Shoulder", sessions: shoulder.length },
-      { region: "Knee", sessions: knee.length },
+      { region: "Neck", sessions: neck.length + 1 },      
+      { region: "Shoulder", sessions: shoulder.length + 1 },
+      { region: "Back", sessions: back.length + 1 },
+      { region: "Knee", sessions: knee.length + 1},
     ]);
   }
 
@@ -221,7 +233,7 @@ function Results() {
               ) : (
                 <Spinner animation="border" variant="primary" />
               )}
-              <h5><span className="neck">Neck</span> <span className="shoulder">Shoulder</span> <span className="back">Back</span> <span className="knee">Knee</span></h5>
+              <h5><span className="neck">Neck</span> <span className="shoulder">Shoulder</span> <span className="back">Back</span> <span className="knee">Knee</span>  </h5>
             </Card>
           </Col>
           <Col>
@@ -230,7 +242,8 @@ function Results() {
                 <h2 className="card-title">
                   {" "}
                   {allInfoStore.length > 0 ? (
-                    allInfoStore[allInfoStore.length - 1].date
+                    reverseDate()
+                    // null
                   ) : (
                     <Spinner animation="border" variant="primary" />
                   )}
@@ -286,7 +299,7 @@ function Results() {
         </Row>
 
         <Row className="pt-4 pb-3">
-          <h2 className="card-title">Session Stats</h2>
+          <h2 className="card-title">Session Stats<hr/></h2>
           <Col className="p-1">
             <Card>
               <h2 className="card-title">Pain Level </h2>
