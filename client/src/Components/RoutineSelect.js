@@ -133,7 +133,7 @@ function changeDate(){
                     Select Current Pain level
                   </Form.Label>
                   <Form.Select
-                    DefaultValue="0"
+                    DefaultValue="1"
                     placeholder="Enter Pain level"
                     onChange={(e) => {
                       e.preventDefault();

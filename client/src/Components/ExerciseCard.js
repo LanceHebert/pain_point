@@ -62,13 +62,17 @@ function ExerciseCard({ exercise }) {
                     <Form.Label>Completed Recommended Sets </Form.Label>
                     <Form.Control
                       type="number"
+                      min="0"
                       placeholder="Enter Sets"
                       onChange={(e) => {
                         e.preventDefault();
+                        if(e.target.value > 0){
                         setNewExercise({
                           ...newExercise,
                           sets: parseInt(e.target.value),
-                        });
+                        })}else{
+                          alert("Must be positive number")                          
+                        }
                       }}
                     />
                   </Form.Group>
@@ -77,13 +81,17 @@ function ExerciseCard({ exercise }) {
                     <Form.Label># of reps of incomplete set</Form.Label>
                     <Form.Control
                       type="number"
+                      min="0"
                       placeholder="Enter Reps"
                       onChange={(e) => {
                         e.preventDefault();
+                        if(e.target.value > 0){
                         setNewExercise({
                           ...newExercise,
                           reps: parseInt(e.target.value),
-                        });
+                        })}else{
+                          alert("Must be positive number")                          
+                        }
                       }}
                     />
                   </Form.Group>
