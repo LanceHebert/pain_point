@@ -32,6 +32,7 @@ function Results() {
       fetch("/routines")
         .then((r) => r.json())
         .then((allInfo) => {
+          setAllInfoStore(allInfo);
           // Filtering all sessions to just be the one with correct region
           const regionChosenFilter = allInfo.filter((instance) => {
             return (
@@ -46,7 +47,7 @@ function Results() {
           graphPain(regionChosenFilter);
           graphRegion(allInfo);
           graphRepsSets(regionChosenFilter);
-          setAllInfoStore(allInfo);
+          
           checkResult(regionChosenFilter);
           calcAvgExercise(allInfo);
           reverseDate();
@@ -56,12 +57,13 @@ function Results() {
 
 
   function reverseDate(){
-    if (allInfoStore.length > 0)
-    {
-     const splitDate =  allInfoStore[allInfoStore.length - 1].date.split('-')
-     const newDate =  splitDate[2]+ '-' + splitDate[1] + '-' + splitDate[0];
-      return newDate
-    }
+    console.log("Here",allInfoStore);
+    // if (allInfoStore.length >= 1)
+    // {
+    //  const splitDate =  allInfoStore[allInfoStore.length - 1].date.split('-')
+    //  const newDate =  splitDate[2]+ '-' + splitDate[1] + '-' + splitDate[0];
+    //   return newDate
+    // }
   }
   function calcAvgExercise() {
     let tempHolder = 0;
@@ -241,6 +243,7 @@ function Results() {
                   {" "}
                   {allInfoStore.length > 0 ? (
                     reverseDate()
+                    // null
                   ) : (
                     <Spinner animation="border" variant="primary" />
                   )}
