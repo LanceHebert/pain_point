@@ -63,7 +63,7 @@ function Exercises({ regionSelected, setRegionSelected }) {
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <h4 style={{color: "red" }}>Error</h4>
-          <p>
+          <p style={{color: "black" }}>
             Must fill out and submit at least one exercise for this session.
           </p>
         </Modal.Body>
@@ -80,7 +80,7 @@ function Exercises({ regionSelected, setRegionSelected }) {
         <div class="row">
           <div class="col-md-4 col-12">
             <i className="fas fa-heart icon-format"></i>
-            <h3 class="feature-title">
+            <h3 class="feature-title ">
               Rate of Perceived exertion should be kept below 8
             </h3>
             <p>

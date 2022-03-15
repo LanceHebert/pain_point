@@ -57,13 +57,15 @@ function Results() {
 
 
   function reverseDate(){
-    console.log("Here",allInfoStore);
-    // if (allInfoStore.length >= 1)
-    // {
-    //  const splitDate =  allInfoStore[allInfoStore.length - 1].date.split('-')
-    //  const newDate =  splitDate[2]+ '-' + splitDate[1] + '-' + splitDate[0];
-    //   return newDate
-    // }
+
+    // console.log("Here",allInfoStore[allInfoStore.length - 1]);
+    if (allInfoStore.length >= 1)
+    {
+     const splitDate =  allInfoStore[allInfoStore.length - 1].date.split('-')
+     const newDate =  splitDate[1]+ '-' + splitDate[2] + '-' + splitDate[0];
+      return newDate
+    }
+
   }
   function calcAvgExercise() {
     let tempHolder = 0;
@@ -106,10 +108,12 @@ function Results() {
     });
 
     setRegionArr([
-      { region: "Neck", sessions: neck.length + 1 },      
-      { region: "Shoulder", sessions: shoulder.length + 1 },
-      { region: "Back", sessions: back.length + 1 },
-      { region: "Knee", sessions: knee.length + 1},
+
+      { region: "Neck", sessions: neck.length  },      
+      { region: "Shoulder", sessions: shoulder.length  },
+      { region: "Back", sessions: back.length  },
+      { region: "Knee", sessions: knee.length },
+
     ]);
   }
 
@@ -298,7 +302,9 @@ function Results() {
           </Col>
         </Row>
 
-        <Row className="pt-4 pb-3">
+
+        <Row sm={12} md={12} className="pt-4 pb-3">
+
           <h2 className="card-title">Session Stats<hr/></h2>
           <Col className="p-1">
             <Card>

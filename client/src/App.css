@@ -22,13 +22,16 @@ span.neck {
   color: #0088fe;
 }
 span.back {
-  color: #FFBB28;
+  color: #ffbb28;
 }
 span.shoulder {
-  color: #00C49F;
+  color: #00c49f;
 }
 span.knee {
-  color: #FF8042;
+  color: #ff8042;
+}
+span.empty {
+  color: #8884d8;
 }
 span.empty{
   color:#8884d8;
@@ -37,6 +40,11 @@ i {
   font-size: 64px;
   padding-bottom: 50px;
 }
+
+h3{
+  color: black;
+}
+
 
 h2.card-title {
   color: #152756;
@@ -270,7 +278,9 @@ video {
   color: #ffffc7;
   text-shadow: -1px 1px 1px #000, 1px 1px 2px #000, 1px -1px 0 #000,
     -1px -1px 0 #000;
-  font-size:30px;
+
+  font-size: 30px;
+
 }
 .exerciseTitle {
   font-size: 64px;
@@ -285,7 +295,7 @@ video {
 .exerciseContainer {
   background-color: #ffffc7;
   background: #ffffc7;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .card-body.card-body {
@@ -329,10 +339,17 @@ label.form-label.formLabelPain {
   box-shadow: 0 10px 6px -6px #777;
   padding: 5px;
 }
-div.m-2. {
+/* div.m-2{
   margin-top: 0;
-}
+
+} */
+
 /* #cardSizing{
   margin-bottom:50px;
   height:200px;
 } */
+
+.feature-title{
+  color:white;
+}
+

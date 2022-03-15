@@ -9,13 +9,13 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
   let navigate = useNavigate();
 
   const [routines, setRoutines] = useState([]);
-  const [date, setDate] = useState(new Date());
-  const [postRoutine, setPostRoutine] = useState({
-    routine: 1,
-    date: date.toLocaleDateString(),
-    muscle_group_id: 0,
-    pain: 0,
-  });
+  const [date, setDate] = useState((new Date()).toLocaleDateString());
+  // const [postRoutine, setPostRoutine] = useState({
+  //   routine: 1,
+  //   date: date.toLocaleDateString(),
+  //   muscle_group_id: 0,
+  //   pain: 0,
+  // });
   const holdey = localStorage.getItem("region");
   const holdey2 = localStorage.getItem("advancedBackup");
   const [holder, setHolder] = useState(holdey ? holdey : regionSelected.name);
@@ -23,10 +23,11 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
     holdey2 ? holdey2 : regionSelected.advanced
   );
   const [showSubmitPain, setShowSubmitPain] = useState(false);
-  const [painStatStore, setPainStatStore] = useState(0);
+  const [painStatStore, setPainStatStore] = useState(1);
 
   useEffect(
     () => {
+      changeDate()
       fetch(`/routines/`)
         .then((r) => r.json())
         .then((routines) => {
@@ -54,6 +55,15 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
     });
   }, [holder]);
 
+function changeDate(){  
+  const splitDate = date.split("/")
+  const fixedDate = splitDate[2]+ "-" + splitDate[0] + "-" + splitDate[1];
+  return fixedDate
+}
+
+
+
+
   function createNewRoutine() {
     if (routines.length < 1) {
       fetch("/routines", {
@@ -62,7 +72,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          date: date.toLocaleDateString(),
+          date: changeDate(),
           routine: 1,
           muscle_group_id: localStorage.getItem("muscle_group_id"),
           pain: painStatStore,
@@ -80,7 +90,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          date: date.toLocaleDateString(),
+          date: changeDate(),
           routine: routines.length + 1,
           muscle_group_id: routines[0].muscle_group.id,
           pain: painStatStore,
@@ -123,7 +133,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
                     Select Current Pain level
                   </Form.Label>
                   <Form.Select
-                    DefaultValue="0"
+                    defaultValue="1"
                     placeholder="Enter Pain level"
                     onChange={(e) => {
                       e.preventDefault();
