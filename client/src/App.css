@@ -1,6 +1,6 @@
 * {
   font-family: "Libre Baskerville", serif;
-  color:black;
+  
 }
 .App {
   text-align: center;
@@ -287,6 +287,8 @@ video {
   background-color: #ffffc7;
   background: #ffffc7;
   margin: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-body.card-body {
