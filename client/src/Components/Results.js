@@ -298,7 +298,7 @@ function Results() {
           </Col>
         </Row>
 
-        <Row className="pt-4 pb-3">
+        <Row sm={12} md={12} className="pt-4 pb-3">
           <h2 className="card-title">Session Stats<hr/></h2>
           <Col className="p-1">
             <Card>

@@ -23,7 +23,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
     holdey2 ? holdey2 : regionSelected.advanced
   );
   const [showSubmitPain, setShowSubmitPain] = useState(false);
-  const [painStatStore, setPainStatStore] = useState(0);
+  const [painStatStore, setPainStatStore] = useState(1);
 
   useEffect(
     () => {
@@ -133,7 +133,7 @@ function changeDate(){
                     Select Current Pain level
                   </Form.Label>
                   <Form.Select
-                    DefaultValue="1"
+                    defaultValue="1"
                     placeholder="Enter Pain level"
                     onChange={(e) => {
                       e.preventDefault();
