@@ -331,10 +331,13 @@ label.form-label.formLabelPain {
   box-shadow: 0 10px 6px -6px #777;
   padding: 5px;
 }
-div.m-2. {
+/* div.m-2{
   margin-top: 0;
-}
+} */
 /* #cardSizing{
   margin-bottom:50px;
   height:200px;
 } */
+.feature-title{
+  color:white;
+}
