@@ -106,10 +106,10 @@ function Results() {
     });
 
     setRegionArr([
-      { region: "Neck", sessions: neck.length + 1 },      
-      { region: "Shoulder", sessions: shoulder.length + 1 },
-      { region: "Back", sessions: back.length + 1 },
-      { region: "Knee", sessions: knee.length + 1},
+      { region: "Neck", sessions: neck.length  },      
+      { region: "Shoulder", sessions: shoulder.length  },
+      { region: "Back", sessions: back.length  },
+      { region: "Knee", sessions: knee.length },
     ]);
   }
 
