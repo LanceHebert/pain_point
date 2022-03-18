@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+
+// Embedding youtube videos into exercise card to be mapped out 
 const YoutubeEmbed = ({ embedId }) => (
   <div className="video-responsive">
     <iframe

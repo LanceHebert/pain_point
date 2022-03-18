@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
-import { Nav, Container, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Navbar } from "react-bootstrap";
 
 function LoginDecider({ setUser, handleLogoutClick }) {
   const [showLogin, setShowLogin] = useState(true);
@@ -26,7 +26,7 @@ function LoginDecider({ setUser, handleLogoutClick }) {
           <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
         </Container>
       </Navbar>
-
+{/* Ternary to decide if Login element should be shown or Signup */}
       {showLogin ? (
         <div>
           <video autoPlay loop id="video-background" muted>

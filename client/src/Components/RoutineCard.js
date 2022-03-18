@@ -10,7 +10,7 @@ function RoutineCard({ routine, setRoutines, routines }) {
       setRoutines(routines.filter((rInstance) => rInstance.id !== routine.id))
     );
   }
-
+// Card to be displayed for each session a user has stored
   return (
     <div className="routineBorderCard">
       <Card>

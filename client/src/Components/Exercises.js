@@ -51,7 +51,7 @@ function Exercises({ regionSelected, setRegionSelected }) {
       </Col>
     );
   });
-
+// Warning modal to inform user they must select one exercise 
   function MyVerticallyCenteredModal(props) {
     return (
       <Modal

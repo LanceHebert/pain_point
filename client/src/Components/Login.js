@@ -74,6 +74,7 @@ function Login({
               ✖️ {err}✖️
             </p>
           ))}
+          {/* Sets ternary to show signup vs Login */}
         </Form.Group>
         <button className="astext" onClick={() => setShowLogin(false)}>
           <span className="astext">Don't have account yet?</span>{" "}

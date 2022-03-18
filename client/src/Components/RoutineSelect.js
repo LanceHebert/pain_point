@@ -9,13 +9,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
   let navigate = useNavigate();
 
   const [routines, setRoutines] = useState([]);
-  const [date, setDate] = useState((new Date()).toLocaleDateString());
-  // const [postRoutine, setPostRoutine] = useState({
-  //   routine: 1,
-  //   date: date.toLocaleDateString(),
-  //   muscle_group_id: 0,
-  //   pain: 0,
-  // });
+  const [date, setDate] = useState((new Date()).toLocaleDateString());  
   const holdey = localStorage.getItem("region");
   const holdey2 = localStorage.getItem("advancedBackup");
   const [holder, setHolder] = useState(holdey ? holdey : regionSelected.name);
@@ -31,7 +25,8 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
       fetch(`/routines/`)
         .then((r) => r.json())
         .then((routines) => {
-          console.log(routines);
+          // Filtering routine based on muscle group region
+
           const filteredRoutines = routines.filter((routine) => {
             return routine.muscle_group.region === holder;
           });
@@ -40,8 +35,9 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
         });
     },
     [holder, regionSelected.name]
-    // [params.id]
+    
   );
+  // Setting local storage for data to be used on refresh of page
   useEffect(() => {
     localStorage.setItem("region", holdey ? holdey : regionSelected.name);
     localStorage.setItem(
@@ -54,7 +50,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
       advancedBackup: holder2,
     });
   }, [holder]);
-
+// Adjusting date input so that it is readable by the backend date format
 function changeDate(){  
   const splitDate = date.split("/")
   const fixedDate = splitDate[2]+ "-" + splitDate[0] + "-" + splitDate[1];
