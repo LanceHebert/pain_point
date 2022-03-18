@@ -28,7 +28,7 @@ function App() {
       }
     });
   }, []);
-
+// Deleting session data to logout user.
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -38,7 +38,7 @@ function App() {
       }
     });
   }
-
+// If user exists do not display login or signup 
   if (!user) return <LoginDecider setUser={setUser} />;
 
   return (

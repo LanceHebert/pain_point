@@ -11,16 +11,14 @@ import {
   Pie,
   Bar,
   Cell,
-  Legend,
-  
+  Legend,  
   ComposedChart,
   Line,
 } from "recharts";
 import { Spinner, Card, Container, Row, Col } from "react-bootstrap";
 
 function Results() {
-  const [allInfoStore, setAllInfoStore] = useState([]);
-  
+  const [allInfoStore, setAllInfoStore] = useState([]);  
   const [data, setData] = useState([]);
   const [regionArr, setRegionArr] = useState([]);
   const [painData, setPainData] = useState([]);
@@ -55,10 +53,9 @@ function Results() {
     []
   );
 
-
+// Adjusting date format to be more readable
   function reverseDate(){
 
-    // console.log("Here",allInfoStore[allInfoStore.length - 1]);
     if (allInfoStore.length >= 1)
     {
      const splitDate =  allInfoStore[allInfoStore.length - 1].date.split('-')
@@ -77,7 +74,7 @@ function Results() {
       return (tempHolder / allInfoStore.length).toFixed(2);
     }
   }
-
+// Checking the difference between initial pain and current selected pain
   function checkResult() {
     if (allInfoStore.length > 0) {
       return (
@@ -92,7 +89,7 @@ function Results() {
   }
 
   // Graph region PIE CHART   ********
-
+// Setting data for pie chart to equal each region
   function graphRegion(allInfo) {
     const neck = allInfo.filter((instance) => {
       return instance.muscle_group.region === "neck";

@@ -36,6 +36,7 @@ function SplashPage() {
       </div>
 
       {/* MODAL */}
+      {/* Modal that does not let you click away until select understood or the X  */}
       <Modal
         show={show}
         onHide={handleClose}

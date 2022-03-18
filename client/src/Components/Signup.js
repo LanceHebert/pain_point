@@ -21,6 +21,7 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
+        // Setting user here to avoid login/signup screen once user is set
         r.json().then((user) => setUser(user));
       } else {
         r.json().then((err) => setErrors(err.errors));
