@@ -294,6 +294,9 @@ video {
   background-color: #1eae98;
   color: black;
   border-style: outset;
+  max-height:400px;
+  min-height:400px;
+  overflow:auto;
   /* height: 500px; */
   /* color: white; */
   /* font-size: 40px; */
