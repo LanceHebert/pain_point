@@ -49,7 +49,9 @@ function SplashPage() {
         <Modal.Header closeButton>
           <Modal.Title style={{color: "red" }} >Warning!</Modal.Title>
         </Modal.Header>
+
         <Modal.Body style={{color: "black" }}>
+
           This website is meant to be educational! These exercises are meant to
           be preventative in nature only and do not serve as a prescription.
           <br />

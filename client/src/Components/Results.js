@@ -55,13 +55,14 @@ function Results() {
 
 // Adjusting date format to be more readable
   function reverseDate(){
-    
+
     if (allInfoStore.length >= 1)
     {
      const splitDate =  allInfoStore[allInfoStore.length - 1].date.split('-')
      const newDate =  splitDate[1]+ '-' + splitDate[2] + '-' + splitDate[0];
       return newDate
     }
+
   }
   function calcAvgExercise() {
     let tempHolder = 0;
@@ -104,10 +105,12 @@ function Results() {
     });
 
     setRegionArr([
+
       { region: "Neck", sessions: neck.length  },      
       { region: "Shoulder", sessions: shoulder.length  },
       { region: "Back", sessions: back.length  },
       { region: "Knee", sessions: knee.length },
+
     ]);
   }
 
@@ -296,7 +299,9 @@ function Results() {
           </Col>
         </Row>
 
+
         <Row sm={12} md={12} className="pt-4 pb-3">
+
           <h2 className="card-title">Session Stats<hr/></h2>
           <Col className="p-1">
             <Card>
