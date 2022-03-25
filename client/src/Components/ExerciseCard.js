@@ -40,7 +40,7 @@ function ExerciseCard({ exercise }) {
       <div className="card">
         <YoutubeEmbed embedId={exercise.videoEmbed} />
         <div id="extraControl">
-        <div className="card-body">
+        <div className="card-body large">
           <h2 className="card-title">{exercise.name}</h2>
           <div id="cardSizing">
           <p className="card-text">{exercise.description}</p>
