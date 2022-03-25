@@ -33,25 +33,23 @@ span.knee {
 span.empty {
   color: #8884d8;
 }
-span.empty{
-  color:#8884d8;
+span.empty {
+  color: #8884d8;
 }
 i {
   font-size: 64px;
   padding-bottom: 50px;
 }
 
-h3{
+h3 {
   color: black;
 }
-
 
 h2.card-title {
   color: #152756;
   font-size: 50px;
   text-shadow: -1px 1px 2px white, 1px 1px 2px white, 1px -1px 0 white,
     -1px -1px 0 white;
-   
 }
 p.pSmallPrint {
   color: red;
@@ -280,7 +278,6 @@ video {
     -1px -1px 0 #000;
 
   font-size: 30px;
-
 }
 .exerciseTitle {
   font-size: 64px;
@@ -302,9 +299,15 @@ video {
   background-color: #1eae98;
   color: black;
   border-style: outset;
+
   /* height: 500px; */
   /* color: white; */
   /* font-size: 40px; */
+}
+.card-body.card-body.large {
+  max-height: 400px;
+  min-height: 400px;
+  overflow: auto;
 }
 label.form-label {
   font-size: 16px;
@@ -349,7 +352,6 @@ label.form-label.formLabelPain {
   height:200px;
 } */
 
-.feature-title{
-  color:white;
+.feature-title {
+  color: white;
 }
-

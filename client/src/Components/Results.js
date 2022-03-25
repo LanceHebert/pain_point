@@ -8,22 +8,27 @@ import {
   Tooltip,
   ResponsiveContainer,
   PieChart,
-  Pie,
+  // Pie,
   Bar,
   Cell,
-  Legend,  
+  Legend,
   ComposedChart,
   Line,
 } from "recharts";
 import { Spinner, Card, Container, Row, Col } from "react-bootstrap";
+import {
+  VictoryPie,
+  VictoryContainer,
+  VictoryLegend,
+  VictoryTooltip,
+} from "victory";
 
 function Results() {
-  const [allInfoStore, setAllInfoStore] = useState([]);  
+  const [allInfoStore, setAllInfoStore] = useState([]);
   const [data, setData] = useState([]);
   const [regionArr, setRegionArr] = useState([]);
   const [painData, setPainData] = useState([]);
   const [setsReps, setSetsReps] = useState([]);
-  
 
   useEffect(
     () =>
@@ -45,7 +50,7 @@ function Results() {
           graphPain(regionChosenFilter);
           graphRegion(allInfo);
           graphRepsSets(regionChosenFilter);
-          
+
           checkResult(regionChosenFilter);
           calcAvgExercise(allInfo);
           reverseDate();
@@ -53,16 +58,13 @@ function Results() {
     []
   );
 
-// Adjusting date format to be more readable
-  function reverseDate(){
-
-    if (allInfoStore.length >= 1)
-    {
-     const splitDate =  allInfoStore[allInfoStore.length - 1].date.split('-')
-     const newDate =  splitDate[1]+ '-' + splitDate[2] + '-' + splitDate[0];
-      return newDate
+  // Adjusting date format to be more readable
+  function reverseDate() {
+    if (allInfoStore.length >= 1) {
+      const splitDate = allInfoStore[allInfoStore.length - 1].date.split("-");
+      const newDate = splitDate[1] + "-" + splitDate[2] + "-" + splitDate[0];
+      return newDate;
     }
-
   }
   function calcAvgExercise() {
     let tempHolder = 0;
@@ -74,7 +76,7 @@ function Results() {
       return (tempHolder / allInfoStore.length).toFixed(2);
     }
   }
-// Checking the difference between initial pain and current selected pain
+  // Checking the difference between initial pain and current selected pain
   function checkResult() {
     if (allInfoStore.length > 0) {
       return (
@@ -89,7 +91,7 @@ function Results() {
   }
 
   // Graph region PIE CHART   ********
-// Setting data for pie chart to equal each region
+  // Setting data for pie chart to equal each region
   function graphRegion(allInfo) {
     const neck = allInfo.filter((instance) => {
       return instance.muscle_group.region === "neck";
@@ -103,45 +105,38 @@ function Results() {
     const knee = allInfo.filter((instance) => {
       return instance.muscle_group.region === "knee";
     });
-
+    // Ternary Logic for showing blank session to prevent text overlapping for empty session edgecase
     setRegionArr([
-
-      { region: "Neck", sessions: neck.length  },      
-      { region: "Shoulder", sessions: shoulder.length  },
-      { region: "Back", sessions: back.length  },
-      { region: "Knee", sessions: knee.length },
-
+      neck.length > 0
+        ? {
+            region: "Neck",
+            sessions: neck.length,
+            label: `Neck: ${neck.length}`,
+          }
+        : { region: " ", sessions: neck.length, label: `` },
+      shoulder.length > 0
+        ? {
+            region: "Shoulder",
+            sessions: shoulder.length,
+            label: `Shoulder: ${shoulder.length}`,
+          }
+        : { region: " ", sessions: shoulder.length, label: `` },
+      back.length > 0
+        ? {
+            region: "Back",
+            sessions: back.length,
+            label: `Back: ${back.length}`,
+          }
+        : { region: " ", sessions: shoulder.length, label: `` },
+      knee.length > 0
+        ? {
+            region: "Knee",
+            sessions: knee.length,
+            label: `Knee: ${knee.length}`,
+          }
+        : { region: " ", sessions: shoulder.length, label: `` },
     ]);
   }
-
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
 
   // Graph RPE AREA CHART ******
   async function graphRPE(regionChosenFilter) {
@@ -208,33 +203,43 @@ function Results() {
           <Col lg={6} className="">
             <Card>
               <h2 className="card-title">Regions Trained </h2>
+            </Card>
+            <Card>
               {regionArr.length > 0 ? (
-                <ResponsiveContainer width="100%" height={400}>
-                  <PieChart width={400} height={400}>
-                    <Pie
-                      data={regionArr}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={renderCustomizedLabel}
-                      outerRadius={80}
-                      fill="#8884d8"
-                      dataKey="sessions"
-                    >
-                      {data.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={COLORS[index % COLORS.length]}
-                        />
-                      ))}
-                    </Pie>
-                    <Legend  />
-                  </PieChart>
-                </ResponsiveContainer>
+                <>
+                  <VictoryLegend
+                    x={75}
+                    y={100}
+                    height={170}
+                    title="Sessions Per Region"
+                    centerTitle
+                    orientation="horizontal"
+                    gutter={20}
+                    style={{
+                      border: { stroke: "black" },
+                      title: { fontSize: 20 },
+                    }}
+                    data={[
+                      { name: "Neck", symbol: { fill: "tomato" } },
+                      { name: "Shoulder", symbol: { fill: "green" } },
+                      { name: "Back", symbol: { fill: "gold" } },
+                      { name: "Knee", symbol: { fill: "blue" } },
+                    ]}
+                  />
+                  <VictoryPie
+                    // labelComponent={<VictoryTooltip data={regionArr.sessions}/>}
+                    data={regionArr}
+                    x={"region"}
+                    y={"sessions"}
+                    style={{ labels: { fontSize: 20, fill: "black" } }}
+                    height={300}
+                    containerComponent={<VictoryContainer responsive={true} />}
+                    colorScale={["tomato", "green", "gold", "blue", "navy"]}
+                  />
+                </>
               ) : (
                 <Spinner animation="border" variant="primary" />
               )}
-              <h5><span className="neck">Neck</span> <span className="shoulder">Shoulder</span> <span className="back">Back</span> <span className="knee">Knee</span>  </h5>
             </Card>
           </Col>
           <Col>
@@ -244,8 +249,8 @@ function Results() {
                   {" "}
                   {allInfoStore.length > 0 ? (
                     reverseDate()
-                    // null
                   ) : (
+                    // null
                     <Spinner animation="border" variant="primary" />
                   )}
                 </h2>
@@ -299,10 +304,11 @@ function Results() {
           </Col>
         </Row>
 
-
         <Row sm={12} md={12} className="pt-4 pb-3">
-
-          <h2 className="card-title">Session Stats<hr/></h2>
+          <h2 className="card-title">
+            Session Stats
+            <hr />
+          </h2>
           <Col className="p-1">
             <Card>
               <h2 className="card-title">Pain Level </h2>
@@ -319,9 +325,21 @@ function Results() {
                   }}
                 >
                   <CartesianGrid stroke="#f5f5f5" />
-                  <XAxis dataKey="session" scale="band" />
-                  <YAxis domain={[1, 10]} />
-                  <Tooltip />
+                  <XAxis
+                    dataKey="session"
+                    scale="band"
+                   
+                    
+                  />
+                  <YAxis
+                    domain={[1, 10]}
+                    label={{
+                      value: "Pain Level",
+                      angle: -90,
+                      position: "insideLeft",
+                    }}
+                  />
+                  <Tooltip labelFormatter={() => ``} />
                   <Legend />
                   <Bar dataKey="pain" barSize={20} fill="#413ea0" />
                   <Line type="monotone" dataKey="pain" stroke="#ff7300" />
@@ -355,7 +373,11 @@ function Results() {
                       fill="url(#color)"
                     />
                     <XAxis dataKey="session" />
-                    <YAxis dataKey="avgRPE" domain={[1, 10]} />
+                    <YAxis dataKey="avgRPE" domain={[1, 10]} label={{
+                      value: "RPE",
+                      angle: -90,
+                      position: "insideLeft",
+                    }} />
                     <Tooltip />
                     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                     <Legend />
