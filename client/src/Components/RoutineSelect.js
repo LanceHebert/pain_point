@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import uuid from "react-uuid";
+import uuid from 'react-uuid'
 import RoutineCard from "./RoutineCard";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
 
