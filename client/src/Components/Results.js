@@ -81,6 +81,7 @@ function Results() {
   // Checking the difference between initial pain and current selected pain
   function checkResult(regionChosenFilter) {
     if (allInfoStore.length > 0 && regionChosenFilter !== undefined) {
+      localStorage.setItem("initialPain", regionChosenFilter[0].pain);
       return (
         ((allInfoStore[allInfoStore.length - 1].pain -
           regionChosenFilter[0].pain) /
@@ -269,7 +270,7 @@ function Results() {
               <Card className="m-3 p-2">
                 <h3>
                   Initial Pain Level:{"  "}
-                  {parseInt(localStorage.getItem("initialPain"))}
+                  {localStorage.getItem("initialPain") ? parseInt(localStorage.getItem("initialPain")) : "No initial Session for this region"}
                 </h3>
 
                 {allInfoStore.length > 0 ? (
