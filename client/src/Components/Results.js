@@ -29,13 +29,14 @@ function Results() {
   const [regionArr, setRegionArr] = useState([]);
   const [painData, setPainData] = useState([]);
   const [setsReps, setSetsReps] = useState([]);
+  const [regionChosenFilterState, setRegionChosenFilterState] = useState([]);
 
   useEffect(
     () =>
       fetch("/routines")
         .then((r) => r.json())
         .then((allInfo) => {
-          console.log({allInfo});
+          console.log({ allInfo });
           setAllInfoStore(allInfo);
           // Filtering all sessions to just be the one with correct region
           const regionChosenFilter = allInfo.filter((instance) => {
@@ -44,24 +45,37 @@ function Results() {
               parseInt(localStorage.getItem("muscle_group_id"))
             );
           });
+
           // Invoking logic for each Chart
-          // localStorage.setItem("initialPain", regionChosenFilter[0].pain);
+          setRegionChosenFilterState(regionChosenFilter);
+          checkUndefinedPain(regionChosenFilter);
 
           graphRPE(regionChosenFilter);
           graphPain(regionChosenFilter);
           graphRegion(allInfo);
           graphRepsSets(regionChosenFilter);
 
-          checkResult(regionChosenFilter);
+          checkResult();
           calcAvgExercise(allInfo);
           reverseDate();
         }),
     []
   );
 
+  function checkUndefinedPain(regionChosenFilter) {
+    if (regionChosenFilter[0] !== undefined) {
+      localStorage.setItem("initialPain", regionChosenFilter[0].pain);
+    } else {
+      localStorage.setItem("initialPain", "No session for this region started");
+    }
+  }
+
   // Adjusting date format to be more readable
- function reverseDate() {
-    if (allInfoStore.length > 1 && allInfoStore[allInfoStore.length - 1].date !== null ) {
+  function reverseDate() {
+    if (
+      allInfoStore.length > 1 &&
+      allInfoStore[allInfoStore.length - 1].date !== null
+    ) {
       const splitDate = allInfoStore[allInfoStore.length - 1].date.split("-");
       const newDate = splitDate[1] + "-" + splitDate[2] + "-" + splitDate[0];
       return newDate;
@@ -79,22 +93,17 @@ function Results() {
     }
   }
   // Checking the difference between initial pain and current selected pain
-  function checkResult(regionChosenFilter) {
-    if (allInfoStore.length > 0 && regionChosenFilter !== undefined) {
-      localStorage.setItem("initialPain", regionChosenFilter[0].pain);
+  function checkResult(r) {
+    if (regionChosenFilterState[0] !== undefined && allInfoStore.length > 0) {
       return (
         ((allInfoStore[allInfoStore.length - 1].pain -
-          regionChosenFilter[0].pain) /
-          regionChosenFilter[0].pain) *
+          regionChosenFilterState[0].pain) /
+          regionChosenFilterState[0].pain) *
         100
       ).toFixed(2);
-    } 
-    else if(regionChosenFilter === undefined){
-      return "No Session"
-    }
-    
-    
-    else {
+    } else if (allInfoStore.length > 0) {
+      return "Comparison Unavailable";
+    } else {
       return <Spinner animation="border" variant="primary" />;
     }
   }
@@ -270,7 +279,9 @@ function Results() {
               <Card className="m-3 p-2">
                 <h3>
                   Initial Pain Level:{"  "}
-                  {localStorage.getItem("initialPain") ? parseInt(localStorage.getItem("initialPain")) : "No initial Session for this region"}
+                  {!!localStorage.getItem("initialPain")
+                    ? localStorage.getItem("initialPain")
+                    : "No session for Region"}
                 </h3>
 
                 {allInfoStore.length > 0 ? (
@@ -334,12 +345,7 @@ function Results() {
                   }}
                 >
                   <CartesianGrid stroke="#f5f5f5" />
-                  <XAxis
-                    dataKey="session"
-                    scale="band"
-                   
-                    
-                  />
+                  <XAxis dataKey="session" scale="band" />
                   <YAxis
                     domain={[1, 10]}
                     label={{
@@ -382,11 +388,15 @@ function Results() {
                       fill="url(#color)"
                     />
                     <XAxis dataKey="session" />
-                    <YAxis dataKey="avgRPE" domain={[1, 10]} label={{
-                      value: "RPE",
-                      angle: -90,
-                      position: "insideLeft",
-                    }} />
+                    <YAxis
+                      dataKey="avgRPE"
+                      domain={[1, 10]}
+                      label={{
+                        value: "RPE",
+                        angle: -90,
+                        position: "insideLeft",
+                      }}
+                    />
                     <Tooltip />
                     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                     <Legend />
