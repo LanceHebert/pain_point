@@ -45,7 +45,7 @@ function Results() {
             );
           });
           // Invoking logic for each Chart
-          localStorage.setItem("initialPain", regionChosenFilter[0].pain);
+          // localStorage.setItem("initialPain", regionChosenFilter[0].pain);
 
           graphRPE(regionChosenFilter);
           graphPain(regionChosenFilter);
@@ -79,15 +79,21 @@ function Results() {
     }
   }
   // Checking the difference between initial pain and current selected pain
-  function checkResult() {
-    if (allInfoStore.length > 0) {
+  function checkResult(regionChosenFilter) {
+    if (allInfoStore.length > 0 && regionChosenFilter !== undefined) {
       return (
         ((allInfoStore[allInfoStore.length - 1].pain -
-          parseInt(localStorage.getItem("initialPain"))) /
-          parseInt(localStorage.getItem("initialPain"))) *
+          regionChosenFilter[0].pain) /
+          regionChosenFilter[0].pain) *
         100
       ).toFixed(2);
-    } else {
+    } 
+    else if(regionChosenFilter === undefined){
+      return "No Session"
+    }
+    
+    
+    else {
       return <Spinner animation="border" variant="primary" />;
     }
   }
