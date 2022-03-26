@@ -35,6 +35,7 @@ function Results() {
       fetch("/routines")
         .then((r) => r.json())
         .then((allInfo) => {
+          console.log({allInfo});
           setAllInfoStore(allInfo);
           // Filtering all sessions to just be the one with correct region
           const regionChosenFilter = allInfo.filter((instance) => {
@@ -59,13 +60,14 @@ function Results() {
   );
 
   // Adjusting date format to be more readable
-  function reverseDate() {
-    if (allInfoStore.length >= 1) {
+ function reverseDate() {
+    if (allInfoStore.length > 1 && allInfoStore[allInfoStore.length - 1].date !== null ) {
       const splitDate = allInfoStore[allInfoStore.length - 1].date.split("-");
       const newDate = splitDate[1] + "-" + splitDate[2] + "-" + splitDate[0];
       return newDate;
     }
   }
+
   function calcAvgExercise() {
     let tempHolder = 0;
     // mapping through all sessions
@@ -113,28 +115,28 @@ function Results() {
             sessions: neck.length,
             label: `Neck: ${neck.length}`,
           }
-        : { region: " ", sessions: neck.length, label: `` },
+        : { region: " ", sessions: 0, label: `` },
       shoulder.length > 0
         ? {
             region: "Shoulder",
             sessions: shoulder.length,
             label: `Shoulder: ${shoulder.length}`,
           }
-        : { region: " ", sessions: shoulder.length, label: `` },
+        : { region: " ", sessions: 0, label: `` },
       back.length > 0
         ? {
             region: "Back",
             sessions: back.length,
             label: `Back: ${back.length}`,
           }
-        : { region: " ", sessions: shoulder.length, label: `` },
+        : { region: " ", sessions: 0, label: `` },
       knee.length > 0
         ? {
             region: "Knee",
             sessions: knee.length,
             label: `Knee: ${knee.length}`,
           }
-        : { region: " ", sessions: shoulder.length, label: `` },
+        : { region: " ", sessions: 0, label: `` },
     ]);
   }
 
@@ -231,7 +233,7 @@ function Results() {
                     data={regionArr}
                     x={"region"}
                     y={"sessions"}
-                    style={{ labels: { fontSize: 20, fill: "black" } }}
+                    style={{ labels: { fontSize: 10, fill: "black" } }}
                     height={300}
                     containerComponent={<VictoryContainer responsive={true} />}
                     colorScale={["tomato", "green", "gold", "blue", "navy"]}
