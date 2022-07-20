@@ -13,7 +13,7 @@ function BodyDiagram({
   const [muscleID, setMuscleID] = useState([]);
   
   
-// Fetching muscle groups 
+// Fetching muscle groups from database, clearing local storage for user flowing backwards through app on page load
   useEffect(() => {
     localStorage.clear();
     fetch("/muscle_groups")
@@ -23,7 +23,7 @@ function BodyDiagram({
       });
   }, []);
 
-  // Clearing Local storage when coming back to Body Diagram page,setting region selected state and storing in local storage as well
+  // Clearing Local storage when coming back to Body Diagram page,setting region selected state and storing in local storage as well on image click
   function handleImgClick(e) {
     localStorage.clear();
 
