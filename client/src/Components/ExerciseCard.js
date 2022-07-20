@@ -30,6 +30,8 @@ function ExerciseCard({ exercise }) {
     })
       .then((r) => r.json())
       .then((returnPostData) => {
+      
+      //setting local storage to be used by exercises component to check if user has entered something.
         localStorage.setItem("exerciseEntered", true);
         console.log(returnPostData);
       });
