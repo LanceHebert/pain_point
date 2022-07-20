@@ -70,7 +70,10 @@ function App() {
       </Navbar>
 
       <Routes>
-                  //splash page route as home
+                  
+//Typical flow through app, LoginDecider(login vs signup)->splashpage-> Body Diagram with selection of body part -> 
+//Routine Select / creation with past history and pain score -> Exercises display with form fill out -> results page with graph of results 
+                  
         <Route path="/" element={<SplashPage />} />
           //Body diagram route with region selected state passed as prop
         <Route
