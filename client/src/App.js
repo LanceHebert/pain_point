@@ -20,7 +20,7 @@ function App() {
     muscle_group_id: 0,
   });
   let navigate = useNavigate();
-
+//fetching user route with session data cookie
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
@@ -43,6 +43,7 @@ function App() {
 
   return (
     <div className="App">
+    //navbar
       <Navbar className="color-nav" expand="lg">
         <Container>
           <Navbar.Brand href="/bodydiagram">
@@ -69,7 +70,9 @@ function App() {
       </Navbar>
 
       <Routes>
+                  //splash page route as home
         <Route path="/" element={<SplashPage />} />
+          //Body diagram route with region selected state passed as prop
         <Route
           path="/bodyDiagram"
           element={
