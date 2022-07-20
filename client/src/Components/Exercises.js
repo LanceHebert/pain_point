@@ -23,7 +23,7 @@ function Exercises({ regionSelected, setRegionSelected }) {
         }),
     []
   );
-
+//setting region selected with region stored in local storage for page refresh
   useEffect(
     () =>
       setRegionSelected({
@@ -39,7 +39,7 @@ function Exercises({ regionSelected, setRegionSelected }) {
         regionSelected.regionBackup === exercise.muscle_group.region) &&
       isTrueSet === exercise.advanced
   );
-
+//mapping out each exercise cards and returning for them to be displayed on exercise page
   const exerciseMap = filterRegionExercises.map((exercise) => {
     return (
       <Col lg={6} className="pb-3 routineCard">
