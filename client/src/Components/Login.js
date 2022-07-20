@@ -17,6 +17,8 @@ function Login({
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
+    
+    //posting to login route which checks if user is authenticated and if so returns user session id
     fetch("/login", {
       method: "POST",
       headers: {
