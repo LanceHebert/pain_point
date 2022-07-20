@@ -61,7 +61,7 @@ function Results() {
         }),
     []
   );
-
+//checking to see if pain exists for initial session
   function checkUndefinedPain(regionChosenFilter) {
     if (regionChosenFilter[0] !== undefined) {
       localStorage.setItem("initialPain", regionChosenFilter[0].pain);
@@ -81,7 +81,7 @@ function Results() {
       return newDate;
     }
   }
-
+//calculating average exercises per session
   function calcAvgExercise() {
     let tempHolder = 0;
     // mapping through all sessions
