@@ -22,7 +22,7 @@ function RoutineSelect({ regionSelected, setRegionSelected }) {
   useEffect(
     () => {
       changeDate()
-      fetch(`/routines/`)
+      fetch(`/api/routines/`)
         .then((r) => r.json())
         .then((routines) => {
           // Filtering routine based on muscle group region
@@ -62,7 +62,7 @@ function changeDate(){
 
   function createNewRoutine() {
     if (routines.length < 1) {
-      fetch("/routines", {
+      fetch("/api/routines", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +80,7 @@ function changeDate(){
           localStorage.setItem("routineNumber", postReturnData.id);
         });
     } else {
-      fetch("/routines", {
+      fetch("/api/routines", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

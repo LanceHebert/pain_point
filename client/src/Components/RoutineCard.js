@@ -4,7 +4,7 @@ import { Button, Card } from "react-bootstrap";
 function RoutineCard({ routine, setRoutines, routines }) {
   console.log({ routine });
   function handleDelete() {
-    fetch(`/routines/${routine.id}`, {
+    fetch(`/api/routines/${routine.id}`, {
       method: "DELETE",
     }).then(() =>
       setRoutines(routines.filter((rInstance) => rInstance.id !== routine.id))

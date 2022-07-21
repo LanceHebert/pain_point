@@ -22,7 +22,7 @@ function App() {
   let navigate = useNavigate();
 //fetching user route with session data cookie
   useEffect(() => {
-    fetch("/me").then((r) => {
+    fetch("/api/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }
@@ -30,7 +30,7 @@ function App() {
   }, []);
 // Deleting session data to logout user.
   function handleLogoutClick() {
-    fetch("/logout", { method: "DELETE" }).then((r) => {
+    fetch("/api/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);
         localStorage.clear();
@@ -43,7 +43,7 @@ function App() {
 
   return (
     <div className="App">
-    //navbar
+    {/* navbar */}
       <Navbar className="color-nav" expand="lg">
         <Container>
           <Navbar.Brand href="/bodydiagram">

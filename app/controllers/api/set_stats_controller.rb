@@ -1,4 +1,4 @@
-class SetStatsController < ApplicationController
+class Api::SetStatsController < ApplicationController
 
         wrap_parameters format: []
 

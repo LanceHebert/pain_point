@@ -12,7 +12,7 @@ function Signup({ setUser, setIsLoading, setErrors, errors, isLoading }) {
     e.preventDefault();
 
     setIsLoading(true);
-    fetch("/signup", {
+    fetch("/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

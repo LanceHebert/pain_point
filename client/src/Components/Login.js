@@ -19,7 +19,7 @@ function Login({
     setIsLoading(true);
     
     //posting to login route which checks if user is authenticated and if so returns user session id
-    fetch("/login", {
+    fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

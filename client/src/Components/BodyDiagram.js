@@ -16,7 +16,7 @@ function BodyDiagram({
 // Fetching muscle groups from database, clearing local storage for user flowing backwards through app on page load
   useEffect(() => {
     localStorage.clear();
-    fetch("/muscle_groups")
+    fetch("/api/muscle_groups")
       .then((r) => r.json())
       .then((muscles) => {
         setMuscleID(muscles);
