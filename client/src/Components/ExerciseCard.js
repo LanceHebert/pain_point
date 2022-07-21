@@ -23,7 +23,7 @@ function ExerciseCard({ exercise }) {
   }
   // Posting to backend the exercise stats entered
   function handleSubmitExercise() {
-    fetch("/set_stats", {
+    fetch("/api/set_stats", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newExercise),

@@ -33,7 +33,7 @@ function Results() {
 
   useEffect(
     () =>
-      fetch("/routines")
+      fetch("/api/routines")
         .then((r) => r.json())
         .then((allInfo) => {
           console.log({ allInfo });

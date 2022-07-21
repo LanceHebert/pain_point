@@ -1,4 +1,4 @@
-class MuscleGroupsController < ApplicationController
+class Api::MuscleGroupsController < ApplicationController
     def index
         render json: MuscleGroup.all
     end

@@ -15,7 +15,7 @@ function Exercises({ regionSelected, setRegionSelected }) {
 
   useEffect(
     () =>
-      fetch(`/exercises`)
+      fetch(`/api/exercises`)
         .then((r) => r.json())
         .then((exercises) => {
           console.log(exercises);
